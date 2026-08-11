@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,6 +56,8 @@
 
         <section class="profile">
 
+            <!-- АВАТАР -->
+
             <div class="avatar-wrapper">
 
                 <img
@@ -66,6 +69,8 @@
 
             </div>
 
+
+            <!-- ИНФОРМАЦИЯ -->
 
             <div class="profile-info">
 
@@ -96,15 +101,22 @@
                  EASTER EGG
             ========================== -->
 
-            <div class="easter-egg">
+            <div
+                class="easter-egg"
+                id="easterEgg"
+            >
 
-                <button
-                    class="thought-button"
-                    aria-label="Секрет"
-                    title=""
-                >
-                    •
-                </button>
+                <!--
+                    Эта область невидимая.
+                    Навёл мышку — появляется мысль.
+                -->
+
+                <div
+                    class="easter-hotspot"
+                    id="easterHotspot"
+                    aria-label="Секретная пасхалка"
+                ></div>
+
 
                 <div class="thought-bubble">
 
@@ -125,7 +137,7 @@
 
 
         <!-- =========================
-             FEATURED PROJECTS
+             PROJECTS
         ========================== -->
 
         <section class="featured-section">
@@ -171,4 +183,5 @@
 <script src="/script.js"></script>
 
 </body>
+
 </html>
