@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Портфолио — IBrop</title>
+
+    <link rel="stylesheet" href="/portfolio/style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <header class="navbar">
+
+        <a class="logo" href="/">
+            IBrop
+        </a>
+
+        <nav>
+            <a href="/">Обо мне</a>
+            <a class="active" href="/portfolio/">Портфолио</a>
+            <a href="https://neo.ibrop.dev/">Neo</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-label">
+                IBrop / Portfolio
+            </div>
+
+            <h1>
+                Проекты
+            </h1>
+
+            <p>
+                Всё, что когда-то начиналось со слов
+                «а что если сделать...»
+            </p>
+
+        </section>
+
+
+        <section
+            id="pinned-section"
+            class="projects-section"
+        >
+
+            <div class="section-title">
+                <span>
+                    Закреплённые
+                </span>
+
+                <span class="line"></span>
+            </div>
+
+            <div
+                id="pinned-projects"
+                class="projects-grid"
+            ></div>
+
+        </section>
+
+
+        <section class="projects-section">
+
+            <div class="section-title">
+
+                <span>
+                    Все проекты
+                </span>
+
+                <span class="line"></span>
+
+            </div>
+
+
+            <div class="filter-bar">
+
+                <button
+                    class="filter active"
+                    data-filter="all"
+                >
+                    Все
+                </button>
+
+                <div
+                    id="dynamic-filters"
+                    class="dynamic-filters"
+                ></div>
+
+            </div>
+
+
+            <div
+                id="all-projects"
+                class="projects-grid"
+            ></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="/portfolio/script.js"></script>
+
+</body>
+
+</html>
