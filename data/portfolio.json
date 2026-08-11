@@ -1,0 +1,61 @@
+[
+  {
+    "id": "verify",
+    "name": "Verify",
+    "description": "Система верификации, доверия и защиты пользователей.",
+    "icon": "/assets/portfolio/verify/icon.png",
+    "banner": "/assets/portfolio/verify/banner.png",
+    "url": "/portfolio/verify/",
+    "favorite": true,
+    "pinned": true,
+    "status": "development",
+    "status_text": "In Development",
+    "category": "Security",
+    "tags": [
+      "Security",
+      "Python",
+      "Networking"
+    ],
+    "visible": true,
+    "order": 1
+  },
+
+  {
+    "id": "neolite",
+    "name": "NeoLite",
+    "description": "Локальный AI-ассистент и экспериментальная AI-платформа.",
+    "icon": "/assets/portfolio/neolite/icon.png",
+    "banner": "/assets/portfolio/neolite/banner.png",
+    "url": "/portfolio/neolite/",
+    "favorite": true,
+    "pinned": true,
+    "status": "development",
+    "status_text": "In Development",
+    "category": "AI",
+    "tags": [
+      "AI",
+      "Python"
+    ],
+    "visible": true,
+    "order": 2
+  },
+
+  {
+    "id": "future-project",
+    "name": "Future Project",
+    "description": "Место для следующей подозрительно грандиозной идеи.",
+    "icon": "/assets/portfolio/future-project/icon.png",
+    "banner": "/assets/portfolio/future-project/banner.png",
+    "url": "/portfolio/future-project/",
+    "favorite": false,
+    "pinned": false,
+    "status": "concept",
+    "status_text": "Concept",
+    "category": "Other",
+    "tags": [
+      "Concept"
+    ],
+    "visible": true,
+    "order": 100
+  }
+]
