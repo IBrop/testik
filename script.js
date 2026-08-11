@@ -1,49 +1,115 @@
+/* =========================
+   PROFILE
+========================= */
+
 async function loadProfile() {
 
     try {
 
         const response =
-            await fetch("/data/profile.json");
+            await fetch(
+                "/data/profile.json"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `HTTP ${response.status}`
+            );
+
+        }
+
 
         const profile =
             await response.json();
 
 
-        document
-            .getElementById("profile-name")
-            .textContent =
-            profile.name;
+        const name =
+            document.getElementById(
+                "profile-name"
+            );
 
 
-        document
-            .getElementById("profile-subtitle")
-            .textContent =
-            profile.subtitle;
+        const subtitle =
+            document.getElementById(
+                "profile-subtitle"
+            );
 
 
-        document
-            .getElementById("profile-description")
-            .textContent =
-            profile.description;
+        const description =
+            document.getElementById(
+                "profile-description"
+            );
 
 
-        document
-            .getElementById("profile-avatar")
-            .src =
-            profile.avatar;
+        const avatar =
+            document.getElementById(
+                "profile-avatar"
+            );
 
 
-        document
-            .getElementById("projects-title")
-            .textContent =
-            profile.projects_title;
+        const projectsTitle =
+            document.getElementById(
+                "projects-title"
+            );
+
+
+        if (
+            profile.name
+        ) {
+
+            name.textContent =
+                profile.name;
+
+        }
+
+
+        if (
+            profile.subtitle
+        ) {
+
+            subtitle.textContent =
+                profile.subtitle;
+
+        }
+
+
+        if (
+            profile.description
+        ) {
+
+            description.textContent =
+                profile.description;
+
+        }
+
+
+        if (
+            profile.avatar
+        ) {
+
+            avatar.src =
+                profile.avatar;
+
+        }
+
+
+        if (
+            profile.projects_title
+        ) {
+
+            projectsTitle.textContent =
+                profile.projects_title;
+
+        }
 
     }
 
     catch (error) {
 
         console.error(
-            "Не удалось загрузить профиль:",
+            "Не удалось загрузить profile.json:",
             error
         );
 
@@ -53,6 +119,10 @@ async function loadProfile() {
 
 
 
+/* =========================
+   PROJECTS
+========================= */
+
 async function loadProjects() {
 
     const container =
@@ -61,12 +131,28 @@ async function loadProjects() {
         );
 
 
+    if (!container) {
+
+        return;
+
+    }
+
+
     try {
 
         const response =
             await fetch(
-                "/data/projects.json"
+                "/data/portfolio.json"
             );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `HTTP ${response.status}`
+            );
+
+        }
 
 
         const projects =
@@ -77,9 +163,30 @@ async function loadProjects() {
             projects
                 .filter(
                     project =>
-                        project.favorite
+                        project.visible !== false
+                        &&
+                        project.favorite === true
                 )
-                .slice(0, 4);
+                .sort(
+                    (a, b) =>
+                        (
+                            a.order
+                            ?? 999
+                        )
+                        -
+                        (
+                            b.order
+                            ?? 999
+                        )
+                )
+                .slice(
+                    0,
+                    4
+                );
+
+
+        container.innerHTML =
+            "";
 
 
         favoriteProjects.forEach(
@@ -96,31 +203,57 @@ async function loadProjects() {
 
 
                 card.href =
-                    `/portfolio/${project.slug}/`;
+                    project.url
+                    ||
+                    `/portfolio/${project.id}/`;
 
 
                 card.innerHTML = `
 
                     <img
                         class="project-icon"
-                        src="${project.icon}"
-                        alt="${project.name}"
+                        src="${escapeHTML(
+                            project.icon
+                        )}"
+                        alt="${escapeHTML(
+                            project.name
+                        )}"
                     >
+
 
                     <div class="project-info">
 
                         <div class="project-name">
-                            ${project.name}
+
+                            ${escapeHTML(
+                                project.name
+                            )}
+
                         </div>
+
 
                         <div class="project-description">
-                            ${project.description}
+
+                            ${escapeHTML(
+                                project.description
+                                ?? ""
+                            )}
+
                         </div>
 
+
                         <div class="project-status">
+
                             <span class="status-dot"></span>
 
-                            ${project.status_text}
+                            ${escapeHTML(
+                                project.status_text
+                                ??
+                                project.status
+                                ??
+                                ""
+                            )}
+
                         </div>
 
                     </div>
@@ -134,18 +267,34 @@ async function loadProjects() {
             }
         );
 
+
+        if (
+            favoriteProjects.length === 0
+        ) {
+
+            container.innerHTML = `
+                <p>
+                    Здесь скоро появятся проекты.
+                </p>
+            `;
+
+        }
+
     }
 
     catch (error) {
 
         console.error(
-            "Не удалось загрузить проекты:",
+            "Не удалось загрузить portfolio.json:",
             error
         );
 
 
-        container.innerHTML =
-            "<p>Проекты временно потерялись где-то между серверами.</p>";
+        container.innerHTML = `
+            <p>
+                Не удалось загрузить проекты.
+            </p>
+        `;
 
     }
 
@@ -153,6 +302,145 @@ async function loadProjects() {
 
 
 
+/* =========================
+   EASTER EGG
+========================= */
+
+function setupEasterEgg() {
+
+    const easterEgg =
+        document.querySelector(
+            ".easter-egg"
+        );
+
+
+    const thoughtButton =
+        document.querySelector(
+            ".thought-button"
+        );
+
+
+    if (
+        !easterEgg
+        ||
+        !thoughtButton
+    ) {
+
+        return;
+
+    }
+
+
+    thoughtButton.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+
+            easterEgg
+                .classList
+                .toggle(
+                    "open"
+                );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            if (
+                !easterEgg.contains(
+                    event.target
+                )
+            ) {
+
+                easterEgg
+                    .classList
+                    .remove(
+                        "open"
+                    );
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                easterEgg
+                    .classList
+                    .remove(
+                        "open"
+                    );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+
+/* =========================
+   START
+========================= */
+
 loadProfile();
 
 loadProjects();
+
+setupEasterEgg();
