@@ -56,6 +56,7 @@ async function loadProfile() {
 
 
         if (
+            name &&
             profile.name
         ) {
 
@@ -66,6 +67,7 @@ async function loadProfile() {
 
 
         if (
+            subtitle &&
             profile.subtitle
         ) {
 
@@ -76,6 +78,7 @@ async function loadProfile() {
 
 
         if (
+            description &&
             profile.description
         ) {
 
@@ -86,6 +89,7 @@ async function loadProfile() {
 
 
         if (
+            avatar &&
             profile.avatar
         ) {
 
@@ -96,6 +100,7 @@ async function loadProfile() {
 
 
         if (
+            projectsTitle &&
             profile.projects_title
         ) {
 
@@ -309,21 +314,20 @@ async function loadProjects() {
 function setupEasterEgg() {
 
     const easterEgg =
-        document.querySelector(
-            ".easter-egg"
+        document.getElementById(
+            "easterEgg"
         );
 
 
-    const thoughtButton =
-        document.querySelector(
-            ".thought-button"
+    const hotspot =
+        document.getElementById(
+            "easterHotspot"
         );
 
 
     if (
-        !easterEgg
-        ||
-        !thoughtButton
+        !easterEgg ||
+        !hotspot
     ) {
 
         return;
@@ -331,7 +335,14 @@ function setupEasterEgg() {
     }
 
 
-    thoughtButton.addEventListener(
+    /*
+        На компьютере работает hover из CSS.
+
+        Нажатие нужно в основном
+        для телефона.
+    */
+
+    hotspot.addEventListener(
         "click",
         event => {
 
@@ -347,6 +358,10 @@ function setupEasterEgg() {
         }
     );
 
+
+    /*
+        Клик вне пасхалки закрывает её.
+    */
 
     document.addEventListener(
         "click",
@@ -369,6 +384,10 @@ function setupEasterEgg() {
         }
     );
 
+
+    /*
+        Escape тоже закрывает.
+    */
 
     document.addEventListener(
         "keydown",
