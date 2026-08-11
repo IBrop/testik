@@ -1,3 +1,7 @@
+/* =========================
+   BASE
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -9,6 +13,8 @@ html {
 body {
     margin: 0;
 
+    min-height: 100vh;
+
     font-family:
         Inter,
         -apple-system,
@@ -16,46 +22,65 @@ body {
         "Segoe UI",
         sans-serif;
 
+    color: #ffffff;
+
     background:
         radial-gradient(
             circle at top,
             #202020,
             #0b0b0b 55%
         );
-
-    color: #ffffff;
-
-    min-height: 100vh;
 }
 
 
 /* =========================
-   ГЛАВНЫЙ КОНТЕЙНЕР
+   PAGE
 ========================= */
 
 .page {
 
-    width: min(
-        1180px,
-        calc(100% - 40px)
-    );
+    width:
+        min(
+            1180px,
+            calc(100% - 40px)
+        );
 
-    margin: 40px auto;
-
-    background:
-        rgba(15, 15, 15, 0.82);
-
-    border:
-        1px solid rgba(255,255,255,0.10);
-
-    border-radius: 24px;
+    margin:
+        40px auto;
 
     overflow: hidden;
 
-    backdrop-filter: blur(18px);
+    background:
+        rgba(
+            15,
+            15,
+            15,
+            0.86
+        );
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.10
+        );
+
+    border-radius:
+        24px;
+
+    backdrop-filter:
+        blur(18px);
 
     box-shadow:
-        0 30px 100px rgba(0,0,0,0.45);
+        0 30px 100px
+        rgba(
+            0,
+            0,
+            0,
+            0.45
+        );
 }
 
 
@@ -65,160 +90,239 @@ body {
 
 .navbar {
 
-    height: 72px;
+    height:
+        72px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
+
+    gap:
+        50px;
 
     padding:
         0 32px;
 
-    gap: 50px;
-
     border-bottom:
-        1px solid rgba(255,255,255,0.08);
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
 }
 
 
 .navbar-logo {
 
-    color: white;
+    color:
+        #ffffff;
 
-    font-size: 20px;
+    font-size:
+        20px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 
-    text-decoration: none;
+    text-decoration:
+        none;
 }
 
 
 .navbar-links {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 30px;
+    gap:
+        30px;
 }
 
 
 .navbar-links a {
 
-    position: relative;
+    position:
+        relative;
 
     color:
-        rgba(255,255,255,0.55);
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
 
-    font-size: 14px;
+    font-size:
+        14px;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    transition: 0.2s;
+    transition:
+        color .2s;
 }
 
 
 .navbar-links a:hover {
 
-    color: white;
+    color:
+        #ffffff;
 }
 
 
 .navbar-links a.active {
 
-    color: white;
+    color:
+        #ffffff;
 }
 
 
 .navbar-links a.active::after {
 
-    content: "";
+    content:
+        "";
 
-    position: absolute;
+    position:
+        absolute;
 
-    left: 0;
+    left:
+        0;
 
-    right: 0;
+    right:
+        0;
 
-    bottom: -25px;
+    bottom:
+        -25px;
 
-    height: 2px;
+    height:
+        2px;
 
-    border-radius: 10px;
+    background:
+        #ffffff;
 
-    background: white;
+    border-radius:
+        10px;
 }
 
 
 /* =========================
-   ПРОФИЛЬ
+   PROFILE
 ========================= */
 
 .profile {
 
-    min-height: 470px;
+    position:
+        relative;
+
+    min-height:
+        470px;
 
     padding:
-        65px 65px;
+        65px;
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         300px 1fr;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 70px;
+    gap:
+        70px;
 }
 
 
+/* =========================
+   AVATAR
+========================= */
+
 .avatar-wrapper {
 
-    width: 300px;
+    width:
+        300px;
 
-    height: 300px;
+    height:
+        300px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    padding: 6px;
+    padding:
+        6px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,0.3),
-            rgba(255,255,255,0.03)
+            rgba(
+                255,
+                255,
+                255,
+                0.3
+            ),
+            rgba(
+                255,
+                255,
+                255,
+                0.03
+            )
         );
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,0.3);
+        0 20px 50px
+        rgba(
+            0,
+            0,
+            0,
+            0.3
+        );
 }
 
 
 .avatar {
 
-    width: 100%;
+    width:
+        100%;
 
-    height: 100%;
+    height:
+        100%;
 
-    object-fit: cover;
+    object-fit:
+        cover;
 
-    border-radius: inherit;
+    border-radius:
+        inherit;
 
-    background: #181818;
+    background:
+        #181818;
 }
 
 
+/* =========================
+   PROFILE INFO
+========================= */
+
 .profile-info {
 
-    max-width: 680px;
+    max-width:
+        680px;
 }
 
 
 .profile-info h1 {
 
-    margin: 0;
+    margin:
+        0;
 
     font-size:
         clamp(
@@ -227,32 +331,45 @@ body {
             110px
         );
 
-    line-height: 0.95;
+    line-height:
+        .95;
 
-    letter-spacing: -6px;
+    letter-spacing:
+        -6px;
 
-    font-weight: 800;
+    font-weight:
+        800;
 }
 
 
 .profile-subtitle {
 
-    margin-top: 22px;
+    margin-top:
+        22px;
 
     color:
-        rgba(255,255,255,0.55);
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
 
-    font-size: 17px;
+    font-size:
+        17px;
 
-    font-weight: 500;
+    font-weight:
+        600;
 }
 
 
 .profile-description {
 
-    margin-top: 35px;
+    margin-top:
+        35px;
 
-    max-width: 650px;
+    max-width:
+        650px;
 
     font-size:
         clamp(
@@ -261,15 +378,299 @@ body {
             24px
         );
 
-    line-height: 1.6;
+    line-height:
+        1.6;
 
     color:
-        rgba(255,255,255,0.82);
+        rgba(
+            255,
+            255,
+            255,
+            0.82
+        );
 }
 
 
 /* =========================
-   ПРОЕКТЫ
+   EASTER EGG
+========================= */
+
+.easter-egg {
+
+    position:
+        absolute;
+
+    right:
+        30px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    z-index:
+        20;
+}
+
+
+/* Маленькая почти незаметная точка */
+
+.thought-button {
+
+    width:
+        28px;
+
+    height:
+        28px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        transparent;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.16
+        );
+
+    font-size:
+        24px;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    transition:
+        color .2s,
+        transform .2s,
+        background .2s;
+}
+
+
+.thought-button:hover {
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
+
+    transform:
+        scale(1.25);
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.03
+        );
+}
+
+
+/* Сама мысль */
+
+.thought-bubble {
+
+    position:
+        absolute;
+
+    right:
+        0;
+
+    bottom:
+        48px;
+
+    width:
+        280px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        10px;
+
+    padding:
+        16px 18px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(
+            25,
+            25,
+            25,
+            0.94
+        );
+
+    backdrop-filter:
+        blur(15px);
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.92
+        );
+
+    font-size:
+        14px;
+
+    line-height:
+        1.45;
+
+    box-shadow:
+        0 15px 40px
+        rgba(
+            0,
+            0,
+            0,
+            0.4
+        );
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transform:
+        translateY(8px)
+        scale(.96);
+
+    transform-origin:
+        bottom right;
+
+    transition:
+        opacity .2s,
+        transform .2s,
+        visibility .2s;
+
+    pointer-events:
+        none;
+}
+
+
+.thought-icon {
+
+    flex:
+        0 0 auto;
+}
+
+
+/* Хвост облака */
+
+.thought-bubble::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    right:
+        14px;
+
+    bottom:
+        -8px;
+
+    width:
+        14px;
+
+    height:
+        14px;
+
+    background:
+        rgba(
+            25,
+            25,
+            25,
+            0.94
+        );
+
+    border-right:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    transform:
+        rotate(45deg);
+}
+
+
+/* Показываем пасхалку */
+
+.easter-egg:hover
+.thought-bubble,
+
+.easter-egg.open
+.thought-bubble {
+
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================
+   FEATURED PROJECTS
 ========================= */
 
 .featured-section {
@@ -278,13 +679,20 @@ body {
         45px 55px 60px;
 
     border-top:
-        1px solid rgba(255,255,255,0.08);
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
 }
 
 
 .section-header {
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         space-between;
@@ -292,49 +700,74 @@ body {
     align-items:
         flex-end;
 
-    margin-bottom: 35px;
+    gap:
+        20px;
+
+    margin-bottom:
+        35px;
 }
 
 
 .section-small {
 
-    font-size: 13px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 2px;
+    margin-bottom:
+        6px;
 
     color:
-        rgba(255,255,255,0.35);
+        rgba(
+            255,
+            255,
+            255,
+            0.35
+        );
 
-    margin-bottom: 6px;
+    font-size:
+        13px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        2px;
 }
 
 
 .section-header h2 {
 
-    margin: 0;
+    margin:
+        0;
 
-    font-size: 35px;
+    font-size:
+        35px;
 
-    letter-spacing: -1px;
+    letter-spacing:
+        -1px;
 }
 
 
 .all-projects-button {
 
     color:
-        rgba(255,255,255,0.65);
+        rgba(
+            255,
+            255,
+            255,
+            0.65
+        );
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    transition: 0.2s;
+    transition:
+        color .2s,
+        transform .2s;
 }
 
 
 .all-projects-button:hover {
 
-    color: white;
+    color:
+        #ffffff;
 
     transform:
         translateX(4px);
@@ -342,12 +775,13 @@ body {
 
 
 /* =========================
-   СЕТКА
+   PROJECT GRID
 ========================= */
 
 .projects-grid {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(
@@ -355,37 +789,57 @@ body {
             1fr
         );
 
-    gap: 20px;
+    gap:
+        20px;
 }
 
 
 /* =========================
-   КАРТОЧКА
+   PROJECT CARD
 ========================= */
 
 .project-card {
 
-    position: relative;
+    position:
+        relative;
 
-    display: block;
+    display:
+        block;
 
-    min-height: 310px;
+    min-height:
+        310px;
 
-    padding: 20px;
+    padding:
+        20px;
 
-    border-radius: 20px;
+    overflow:
+        hidden;
 
-    overflow: hidden;
+    color:
+        #ffffff;
 
-    text-decoration: none;
-
-    color: white;
+    text-decoration:
+        none;
 
     background:
-        rgba(255,255,255,0.045);
+        rgba(
+            255,
+            255,
+            255,
+            0.045
+        );
 
     border:
-        1px solid rgba(255,255,255,0.08);
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+
+    border-radius:
+        20px;
 
     transition:
         transform .25s,
@@ -400,161 +854,150 @@ body {
         translateY(-7px);
 
     background:
-        rgba(255,255,255,0.07);
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
 
     border-color:
-        rgba(255,255,255,0.18);
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
 }
 
 
 .project-icon {
 
-    width: 100%;
+    width:
+        100%;
 
-    aspect-ratio: 1;
+    aspect-ratio:
+        1;
 
-    border-radius: 14px;
+    object-fit:
+        cover;
 
-    object-fit: cover;
+    border-radius:
+        14px;
 
-    background: #161616;
+    background:
+        #161616;
 }
 
 
 .project-info {
 
-    margin-top: 16px;
+    margin-top:
+        16px;
 }
 
 
 .project-name {
 
-    font-size: 20px;
+    font-size:
+        20px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 }
 
 
 .project-description {
 
-    margin-top: 5px;
-
-    font-size: 13px;
-
-    line-height: 1.4;
+    margin-top:
+        5px;
 
     color:
-        rgba(255,255,255,0.48);
+        rgba(
+            255,
+            255,
+            255,
+            0.48
+        );
+
+    font-size:
+        13px;
+
+    line-height:
+        1.4;
 }
 
 
 .project-status {
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 6px;
+    gap:
+        6px;
 
-    margin-top: 12px;
-
-    font-size: 12px;
+    margin-top:
+        12px;
 
     color:
-        rgba(255,255,255,0.55);
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    font-size:
+        12px;
 }
 
 
 .status-dot {
 
-    width: 7px;
+    width:
+        7px;
 
-    height: 7px;
+    height:
+        7px;
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
-    background: currentColor;
+    background:
+        currentColor;
 }
 
 
 /* =========================
-   МОБИЛЬНАЯ ВЕРСИЯ
+   TABLET
 ========================= */
 
 @media
-(max-width: 900px) {
-
-    .page {
-
-        width:
-            calc(100% - 24px);
-
-        margin:
-            12px auto;
-
-        border-radius: 18px;
-    }
-
-
-    .navbar {
-
-        padding:
-            0 20px;
-
-        gap: 30px;
-
-        overflow-x: auto;
-    }
-
+(max-width: 1000px) {
 
     .profile {
 
         grid-template-columns:
-            1fr;
+            240px 1fr;
 
-        text-align: center;
+        gap:
+            45px;
 
         padding:
-            55px 25px;
-
-        gap: 35px;
+            55px 45px;
     }
 
 
     .avatar-wrapper {
 
-        width: 220px;
+        width:
+            240px;
 
-        height: 220px;
-
-        margin: auto;
-    }
-
-
-    .profile-info {
-
-        margin: auto;
-    }
-
-
-    .profile-info h1 {
-
-        letter-spacing: -3px;
-    }
-
-
-    .profile-description {
-
-        margin-left: auto;
-
-        margin-right: auto;
-    }
-
-
-    .featured-section {
-
-        padding:
-            40px 25px;
+        height:
+            240px;
     }
 
 
@@ -570,11 +1013,158 @@ body {
 }
 
 
+/* =========================
+   MOBILE
+========================= */
+
 @media
-(max-width: 550px) {
+(max-width: 750px) {
+
+    .page {
+
+        width:
+            calc(
+                100% - 20px
+            );
+
+        margin:
+            10px auto;
+
+        border-radius:
+            18px;
+    }
+
+
+    .navbar {
+
+        padding:
+            0 20px;
+
+        gap:
+            30px;
+
+        overflow-x:
+            auto;
+    }
+
+
+    .profile {
+
+        grid-template-columns:
+            1fr;
+
+        text-align:
+            center;
+
+        padding:
+            55px 25px 80px;
+
+        gap:
+            35px;
+    }
+
+
+    .avatar-wrapper {
+
+        width:
+            210px;
+
+        height:
+            210px;
+
+        margin:
+            auto;
+    }
+
+
+    .profile-info {
+
+        margin:
+            auto;
+    }
+
+
+    .profile-info h1 {
+
+        letter-spacing:
+            -3px;
+    }
+
+
+    .profile-description {
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+    }
+
+
+    .easter-egg {
+
+        right:
+            22px;
+
+        top:
+            auto;
+
+        bottom:
+            22px;
+
+        transform:
+            none;
+    }
+
+
+    .thought-bubble {
+
+        right:
+            0;
+
+        bottom:
+            48px;
+
+        width:
+            min(
+                280px,
+                calc(
+                    100vw - 60px
+                )
+            );
+    }
+
+
+    .featured-section {
+
+        padding:
+            40px 25px;
+    }
+
+
+    .section-header {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media
+(max-width: 520px) {
 
     .navbar-logo {
-        display: none;
+
+        display:
+            none;
     }
 
 
@@ -587,7 +1177,8 @@ body {
 
     .navbar-links {
 
-        gap: 22px;
+        gap:
+            22px;
     }
 
 
@@ -595,18 +1186,6 @@ body {
 
         grid-template-columns:
             1fr;
-    }
-
-
-    .section-header {
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
-
-        gap: 15px;
     }
 
 }
