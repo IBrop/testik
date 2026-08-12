@@ -774,6 +774,357 @@ body {
         #ffffff;
 }
 
+/* =========================================================
+   ARCHITECTURE NODE DETAILS
+========================================================= */
+
+.architecture-node {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+}
+
+
+.node-small {
+    color:
+        rgba(255,255,255,0.28);
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+}
+
+
+.architecture-transport {
+    background:
+        rgba(30,110,255,0.08);
+
+    border-color:
+        rgba(70,145,255,0.18);
+}
+
+
+.architecture-transport strong {
+    color:
+        #8abaff;
+}
+
+
+/* =========================================================
+   TRISEC TECHNOLOGY CARD
+========================================================= */
+
+.technology-card {
+    display: block;
+
+    margin-top: 35px;
+
+    padding: 28px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,90,190,0.10),
+            rgba(255,255,255,0.025)
+        );
+
+    border:
+        1px solid
+        rgba(80,145,255,0.16);
+
+    border-radius: 20px;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+
+.technology-card:hover {
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(90,160,255,0.35);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30,100,220,0.15),
+            rgba(255,255,255,0.04)
+        );
+}
+
+
+.technology-card-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.technology-label {
+    color:
+        #72aaff;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.technology-arrow {
+    color:
+        rgba(255,255,255,0.35);
+
+    font-size: 20px;
+
+    transition:
+        transform .25s ease,
+        color .25s ease;
+}
+
+
+.technology-card:hover
+.technology-arrow {
+    color: #ffffff;
+
+    transform:
+        translate(
+            3px,
+            -3px
+        );
+}
+
+
+.technology-name {
+    margin-top: 30px;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+
+.technology-description {
+    margin-top: 6px;
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-size: 14px;
+}
+
+
+.technology-open {
+    margin-top: 30px;
+
+    color:
+        rgba(255,255,255,0.65);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   VERIFY ↔ TRISEC RELATION
+========================================================= */
+
+.project-relation {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        130px
+        minmax(0, 1fr);
+
+    align-items: stretch;
+
+    gap: 20px;
+
+    margin-top: 40px;
+}
+
+
+.relation-project {
+    min-height: 220px;
+
+    padding: 28px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.07);
+
+    border-radius: 20px;
+}
+
+
+.relation-project h3 {
+    margin:
+        35px 0 10px;
+
+    font-size: 32px;
+
+    letter-spacing: -1px;
+}
+
+
+.relation-project p {
+    margin: 0;
+
+    max-width: 380px;
+
+    color:
+        rgba(255,255,255,0.48);
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.relation-type {
+    color:
+        rgba(255,255,255,0.28);
+
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+}
+
+
+.relation-link {
+    position: relative;
+
+    display: block;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
+}
+
+
+.relation-link:hover {
+    transform:
+        translateY(-4px);
+
+    background:
+        rgba(40,110,255,0.07);
+
+    border-color:
+        rgba(80,150,255,0.22);
+}
+
+
+.relation-open {
+    position: absolute;
+
+    left: 28px;
+    bottom: 24px;
+
+    color:
+        #75adff;
+
+    font-size: 12px;
+}
+
+
+.relation-connection {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color:
+        rgba(255,255,255,0.3);
+
+    font-size: 11px;
+}
+
+
+.relation-line {
+    width: 100%;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.08),
+            rgba(70,140,255,0.4),
+            rgba(255,255,255,0.08)
+        );
+}
+
+
+.relation-connection strong {
+    color:
+        #6ca6ff;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .project-relation {
+        grid-template-columns: 1fr;
+    }
+
+
+    .relation-connection {
+        min-height: 80px;
+    }
+
+
+    .relation-line {
+        width: 1px;
+
+        height: 40px;
+    }
+
+
+    .relation-connection strong {
+        transform:
+            rotate(90deg);
+    }
+
+
+    .technology-name {
+        font-size: 32px;
+    }
+
+}
 
 /* =========================
    RESPONSIVE
