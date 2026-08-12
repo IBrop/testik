@@ -3,28 +3,47 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Verify — система верификации, доверия и защиты пользователей от IBrop."
+    >
 
     <title>Verify — IBrop</title>
 
-    <link rel="stylesheet" href="/portfolio/verify/style.css">
+    <link
+        rel="stylesheet"
+        href="/portfolio/verify/style.css"
+    >
 </head>
+
 
 <body>
 
 <div class="page">
 
-    <!-- =========================
+
+    <!-- =====================================================
          NAVBAR
-    ========================== -->
+    ====================================================== -->
 
     <header class="navbar">
 
-        <a class="logo" href="/">
+        <a
+            class="logo"
+            href="/"
+        >
             IBrop
         </a>
 
+
         <nav>
+
             <a href="/">
                 Обо мне
             </a>
@@ -33,25 +52,40 @@
                 Портфолио
             </a>
 
-            <a class="active" href="/portfolio/verify/">
+            <a
+                class="active"
+                href="/portfolio/verify/"
+            >
                 Verify
             </a>
+
         </nav>
 
     </header>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          HERO
-    ========================== -->
+    ====================================================== -->
 
     <section class="hero">
 
+
+        <!-- BANNER -->
+
         <div class="hero-background"></div>
+
+
+        <!-- DARK GRADIENT -->
 
         <div class="hero-overlay"></div>
 
+
+        <!-- CONTENT -->
+
         <div class="hero-content">
+
 
             <a
                 class="back-link"
@@ -60,33 +94,46 @@
                 ← Назад в портфолио
             </a>
 
+
             <div class="hero-badge">
                 Security Project
             </div>
+
 
             <h1>
                 Verify
             </h1>
 
+
             <p class="hero-description">
-                Система верификации, доверия и защиты пользователей,
-                устройств и серверов.
+
+                Система верификации, доверия
+                и защиты пользователей.
+
             </p>
+
 
             <div class="hero-meta">
 
+
                 <div class="status">
+
                     <span class="status-dot"></span>
+
                     In Development
+
                 </div>
 
+
                 <div class="meta-item">
-                    2026
+                    Security
                 </div>
+
 
                 <div class="meta-item">
                     IBrop
                 </div>
+
 
             </div>
 
@@ -95,16 +142,18 @@
     </section>
 
 
-    <!-- =========================
-         CONTENT
-    ========================== -->
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
 
     <main class="content">
 
 
-        <!-- =========================
+
+        <!-- =================================================
              ABOUT
-        ========================== -->
+        ================================================== -->
 
         <section class="content-section">
 
@@ -112,25 +161,38 @@
                 01 / О проекте
             </div>
 
+
             <div class="section-grid">
+
 
                 <h2>
                     Что такое Verify
                 </h2>
 
+
                 <div class="section-text">
 
                     <p>
-                        Verify — это проект системы доверенной верификации,
-                        которая создавалась для проверки пользователей,
-                        устройств и взаимодействия между несколькими серверами.
+                        Verify — самостоятельная система
+                        верификации и доверия, предназначенная
+                        для проверки пользователей и защиты
+                        сервисов от нежелательного доступа.
                     </p>
 
+
                     <p>
-                        Главная идея проекта — не полагаться только на один
-                        пароль, один IP-адрес или один сервер. Вместо этого
-                        система использует несколько этапов проверки,
-                        challenge-response, подписи и отдельные уровни доверия.
+                        Проект использует собственный агент,
+                        собственную серверную инфраструктуру
+                        и собственную логику проверки.
+                    </p>
+
+
+                    <p>
+                        Verify не является частью TriSec.
+                        Это два отдельных проекта.
+                        TriSec используется Verify как
+                        технология защищённой передачи данных
+                        между компонентами системы.
                     </p>
 
                 </div>
@@ -140,9 +202,10 @@
         </section>
 
 
-        <!-- =========================
+
+        <!-- =================================================
              STORY
-        ========================== -->
+        ================================================== -->
 
         <section class="content-section">
 
@@ -150,30 +213,44 @@
                 02 / История
             </div>
 
+
             <div class="section-grid">
 
+
                 <h2>
-                    Как появился Verify
+                    С чего всё началось
                 </h2>
+
 
                 <div class="section-text">
 
                     <p>
-                        Изначально Verify задумывался как система верификации
-                        для Discord-сервера, которая могла бы лучше защищать
-                        сервер от обхода банов и повторной регистрации.
+                        Verify изначально появился как идея
+                        собственной системы верификации.
                     </p>
 
-                    <p>
-                        Постепенно идея выросла в полноценную систему:
-                        появились несколько серверов, отдельный Vault,
-                        challenge-response, подписи, резервные каналы
-                        и собственная логика доверия.
-                    </p>
 
                     <p>
-                        Позже часть этой архитектуры выросла в отдельную
-                        библиотеку TriSec.
+                        Вместо простой проверки пользователя
+                        проект постепенно начал развиваться
+                        в отдельную систему со своим агентом,
+                        серверами и механизмами определения
+                        доверия.
+                    </p>
+
+
+                    <p>
+                        Позже для безопасной передачи данных
+                        между компонентами Verify начал
+                        использоваться TriSec.
+                    </p>
+
+
+                    <p>
+                        При этом развитие двух проектов
+                        происходит независимо:
+                        Verify отвечает за верификацию,
+                        а TriSec — за защищённую передачу.
                     </p>
 
                 </div>
@@ -183,9 +260,10 @@
         </section>
 
 
-        <!-- =========================
+
+        <!-- =================================================
              FEATURES
-        ========================== -->
+        ================================================== -->
 
         <section class="content-section">
 
@@ -193,12 +271,16 @@
                 03 / Возможности
             </div>
 
+
             <h2 class="wide-title">
-                Основные идеи проекта
+                Из чего состоит Verify
             </h2>
 
 
             <div class="feature-grid">
+
+
+                <!-- AGENT -->
 
                 <article class="feature-card">
 
@@ -206,17 +288,25 @@
                         01
                     </div>
 
+
                     <h3>
-                        Device Verification
+                        Verify Agent
                     </h3>
 
+
                     <p>
-                        Проверка устройства и создание доверенной
-                        связи между клиентом и системой.
+                        Собственный агент Verify,
+                        который работает на стороне
+                        устройства пользователя и
+                        взаимодействует с инфраструктурой
+                        Verify.
                     </p>
 
                 </article>
 
+
+
+                <!-- SERVERS -->
 
                 <article class="feature-card">
 
@@ -224,17 +314,24 @@
                         02
                     </div>
 
+
                     <h3>
-                        Challenge-Response
+                        Verify Servers
                     </h3>
 
+
                     <p>
-                        Сервер выдаёт challenge, а клиент подтверждает
-                        владение ключом через подпись.
+                        Серверная часть проекта,
+                        которая принимает запросы,
+                        выполняет проверки и управляет
+                        процессом верификации.
                     </p>
 
                 </article>
 
+
+
+                <!-- TRUST -->
 
                 <article class="feature-card">
 
@@ -242,17 +339,24 @@
                         03
                     </div>
 
+
                     <h3>
-                        Multi-Server
+                        Trust System
                     </h3>
 
+
                     <p>
-                        Verify проектировался как система из нескольких
-                        серверов с разделёнными задачами.
+                        Собственная логика Verify
+                        для определения доверия
+                        и обработки результатов
+                        проверки.
                     </p>
 
                 </article>
 
+
+
+                <!-- TRANSPORT -->
 
                 <article class="feature-card">
 
@@ -260,25 +364,31 @@
                         04
                     </div>
 
+
                     <h3>
-                        Emergency Channel
+                        Secure Transport
                     </h3>
 
+
                     <p>
-                        Резервная архитектура для работы системы
-                        при сбоях основных каналов.
+                        Для защищённой передачи данных
+                        между компонентами Verify
+                        используется отдельный проект
+                        TriSec.
                     </p>
 
                 </article>
+
 
             </div>
 
         </section>
 
 
-        <!-- =========================
+
+        <!-- =================================================
              ARCHITECTURE
-        ========================== -->
+        ================================================== -->
 
         <section class="content-section">
 
@@ -286,50 +396,95 @@
                 04 / Архитектура
             </div>
 
+
             <h2 class="wide-title">
-                Как устроена система
+                Как всё связано
             </h2>
 
 
             <div class="architecture">
 
+
                 <div class="architecture-node">
-                    Sender
+
+                    <span class="node-small">
+                        CLIENT
+                    </span>
+
+                    <strong>
+                        Verify Agent
+                    </strong>
+
                 </div>
+
 
                 <div class="architecture-arrow">
                     →
                 </div>
 
-                <div class="architecture-node">
-                    Server 1
+
+                <div class="architecture-node architecture-transport">
+
+                    <span class="node-small">
+                        TRANSPORT
+                    </span>
+
+                    <strong>
+                        TriSec
+                    </strong>
+
                 </div>
+
 
                 <div class="architecture-arrow">
                     →
                 </div>
 
+
                 <div class="architecture-node">
-                    Server 2
+
+                    <span class="node-small">
+                        BACKEND
+                    </span>
+
+                    <strong>
+                        Verify Servers
+                    </strong>
+
                 </div>
+
 
                 <div class="architecture-arrow">
                     →
                 </div>
 
+
                 <div class="architecture-node">
-                    Server 3
+
+                    <span class="node-small">
+                        VERIFY
+                    </span>
+
+                    <strong>
+                        Trust System
+                    </strong>
+
                 </div>
+
 
             </div>
 
 
             <div class="architecture-note">
 
-                <strong>Vault</strong>
+                <strong>
+                    Важно:
+                </strong>
 
                 <span>
-                    хранит доверенные ключи и данные устройств
+                    TriSec здесь является транспортным
+                    слоем. Verify и TriSec —
+                    отдельные проекты.
                 </span>
 
             </div>
@@ -337,49 +492,231 @@
         </section>
 
 
-        <!-- =========================
+
+        <!-- =================================================
+             TRISEC
+        ================================================== -->
+
+        <section class="content-section">
+
+            <div class="section-label">
+                05 / Технологии
+            </div>
+
+
+            <div class="section-grid">
+
+
+                <h2>
+                    Использует TriSec
+                </h2>
+
+
+                <div class="section-text">
+
+                    <p>
+                        Verify использует TriSec для
+                        защищённой передачи данных между
+                        своим агентом и серверной
+                        инфраструктурой.
+                    </p>
+
+
+                    <!-- =====================================
+                         CLICKABLE TRISEC CARD
+                    ====================================== -->
+
+                    <a
+                        class="technology-card"
+                        href="/portfolio/trisec/"
+                    >
+
+                        <div class="technology-card-top">
+
+                            <span class="technology-label">
+                                USES
+                            </span>
+
+                            <span class="technology-arrow">
+                                ↗
+                            </span>
+
+                        </div>
+
+
+                        <div class="technology-name">
+                            TriSec
+                        </div>
+
+
+                        <div class="technology-description">
+                            Secure transport layer
+                        </div>
+
+
+                        <div class="technology-open">
+                            Открыть проект →
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             VERIFY / TRISEC SEPARATION
+        ================================================== -->
+
+        <section class="content-section">
+
+            <div class="section-label">
+                06 / Разделение
+            </div>
+
+
+            <h2 class="wide-title">
+                Два проекта. Две задачи.
+            </h2>
+
+
+            <div class="project-relation">
+
+
+                <!-- VERIFY -->
+
+                <div class="relation-project">
+
+                    <span class="relation-type">
+                        VERIFICATION
+                    </span>
+
+                    <h3>
+                        Verify
+                    </h3>
+
+                    <p>
+                        Агент, серверы, проверки,
+                        идентификация и система доверия.
+                    </p>
+
+                </div>
+
+
+
+                <!-- CONNECTION -->
+
+                <div class="relation-connection">
+
+                    <span>
+                        использует
+                    </span>
+
+                    <div class="relation-line"></div>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </div>
+
+
+
+                <!-- TRISEC -->
+
+                <a
+                    class="relation-project relation-link"
+                    href="/portfolio/trisec/"
+                >
+
+                    <span class="relation-type">
+                        TRANSPORT
+                    </span>
+
+                    <h3>
+                        TriSec
+                    </h3>
+
+                    <p>
+                        Отдельная технология
+                        защищённой передачи данных.
+                    </p>
+
+
+                    <span class="relation-open">
+                        Подробнее →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
              STATUS
-        ========================== -->
+        ================================================== -->
 
         <section class="content-section final-section">
 
             <div class="section-label">
-                05 / Сейчас
+                07 / Сейчас
             </div>
 
+
             <div class="section-grid">
+
 
                 <h2>
                     Статус проекта
                 </h2>
 
+
                 <div class="section-text">
 
                     <p>
-                        Verify находится в активной разработке.
-                        Архитектура и базовые механизмы уже существуют,
-                        но проект ещё продолжает развиваться.
+                        Verify находится в активной
+                        разработке.
                     </p>
 
+
+                    <p>
+                        Архитектура проекта продолжает
+                        развиваться вместе с агентом,
+                        серверной частью и системой
+                        доверия.
+                    </p>
+
+
                     <div class="progress-block">
+
 
                         <div class="progress-top">
 
                             <span>
-                                Development
+                                Verify
                             </span>
 
                             <span>
-                                In Progress
+                                In Development
                             </span>
 
                         </div>
+
 
                         <div class="progress-bar">
 
                             <div class="progress-value"></div>
 
                         </div>
+
 
                     </div>
 
@@ -393,9 +730,10 @@
     </main>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          FOOTER
-    ========================== -->
+    ====================================================== -->
 
     <footer class="footer">
 
@@ -403,11 +741,13 @@
             Verify / IBrop
         </span>
 
+
         <a href="/portfolio/">
             Вернуться в портфолио →
         </a>
 
     </footer>
+
 
 </div>
 
