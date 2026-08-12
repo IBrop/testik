@@ -4,21 +4,30 @@ const PORTFOLIO_URL =
 
 let projects = [];
 
-let activeFilter = "all";
+let activeFilter =
+    "all";
 
+
+/* =========================
+   LOAD
+========================= */
 
 async function loadPortfolio() {
 
     try {
 
         const response =
-            await fetch(PORTFOLIO_URL);
+            await fetch(
+                PORTFOLIO_URL
+            );
 
 
         if (!response.ok) {
+
             throw new Error(
                 `HTTP ${response.status}`
             );
+
         }
 
 
@@ -56,21 +65,30 @@ async function loadPortfolio() {
         );
 
 
-        document
-            .getElementById(
+        const allProjects =
+            document.getElementById(
                 "all-projects"
-            )
-            .innerHTML = `
-                <div>
+            );
+
+
+        if (allProjects) {
+
+            allProjects.innerHTML = `
+                <div class="load-error">
                     Не удалось загрузить проекты.
                 </div>
             `;
+
+        }
 
     }
 
 }
 
 
+/* =========================
+   FILTERS
+========================= */
 
 function buildFilters() {
 
@@ -78,6 +96,15 @@ function buildFilters() {
         document.getElementById(
             "dynamic-filters"
         );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    container.innerHTML =
+        "";
 
 
     const categories =
@@ -141,21 +168,28 @@ function buildFilters() {
         );
 
 
-    allButton.addEventListener(
-        "click",
-        () => {
+    if (allButton) {
 
-            setFilter(
-                "all",
-                allButton
-            );
+        allButton.addEventListener(
+            "click",
+            () => {
 
-        }
-    );
+                setFilter(
+                    "all",
+                    allButton
+                );
+
+            }
+        );
+
+    }
 
 }
 
 
+/* =========================
+   SET FILTER
+========================= */
 
 function setFilter(
     filter,
@@ -171,16 +205,23 @@ function setFilter(
             ".filter"
         )
         .forEach(
-            item =>
+            item => {
+
                 item
                     .classList
-                    .remove("active")
+                    .remove(
+                        "active"
+                    );
+
+            }
         );
 
 
     button
         .classList
-        .add("active");
+        .add(
+            "active"
+        );
 
 
     renderAll();
@@ -188,6 +229,9 @@ function setFilter(
 }
 
 
+/* =========================
+   PINNED
+========================= */
 
 function renderPinned() {
 
@@ -203,10 +247,20 @@ function renderPinned() {
         );
 
 
+    if (
+        !container ||
+        !section
+    ) {
+
+        return;
+
+    }
+
+
     const pinned =
         projects.filter(
             project =>
-                project.pinned
+                project.pinned === true
         );
 
 
@@ -218,7 +272,12 @@ function renderPinned() {
             "none";
 
         return;
+
     }
+
+
+    section.style.display =
+        "";
 
 
     container.innerHTML =
@@ -235,6 +294,9 @@ function renderPinned() {
 }
 
 
+/* =========================
+   ALL PROJECTS
+========================= */
 
 function renderAll() {
 
@@ -244,12 +306,18 @@ function renderAll() {
         );
 
 
+    if (!container) {
+        return;
+    }
+
+
     let filtered =
         projects;
 
 
     if (
-        activeFilter !== "all"
+        activeFilter !==
+        "all"
     ) {
 
         filtered =
@@ -258,6 +326,21 @@ function renderAll() {
                     project.category
                     === activeFilter
             );
+
+    }
+
+
+    if (
+        filtered.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="load-error">
+                В этой категории пока ничего нет.
+            </div>
+        `;
+
+        return;
 
     }
 
@@ -276,11 +359,71 @@ function renderAll() {
 }
 
 
+/* =========================
+   PROJECT CARD
+========================= */
 
 function createProjectCard(
     project,
     showPin
 ) {
+
+    const name =
+        escapeHTML(
+            project.name
+            ?? "Без названия"
+        );
+
+
+    const description =
+        escapeHTML(
+            project.description
+            ?? ""
+        );
+
+
+    const category =
+        escapeHTML(
+            project.category
+            ?? ""
+        );
+
+
+    const status =
+        escapeHTML(
+            project.status_text
+            ??
+            project.status
+            ??
+            ""
+        );
+
+
+    const url =
+        escapeHTML(
+            project.url
+            ||
+            `/portfolio/${project.id}/`
+        );
+
+
+    const icon =
+        escapeHTML(
+            project.icon
+            ??
+            "/assets/projects/default.png"
+        );
+
+
+    const banner =
+        escapeHTML(
+            project.banner
+            ??
+            project.icon
+            ??
+            "/assets/projects/default.png"
+        );
+
 
     const pin =
         showPin
@@ -296,77 +439,79 @@ function createProjectCard(
 
         <a
             class="project-card"
-            href="${escapeHTML(project.url)}"
+            href="${url}"
         >
 
             ${pin}
 
-            <div class="project-visual">
+
+            <!-- BANNER -->
+
+            <div class="project-banner">
 
                 <img
-                    class="project-banner"
-                    src="${escapeHTML(project.banner)}"
+                    class="project-banner-image"
+                    src="${banner}"
                     alt=""
-                >
-
-                <img
-                    class="project-icon"
-                    src="${escapeHTML(project.icon)}"
-                    alt="${escapeHTML(project.name)}"
+                    loading="lazy"
                 >
 
             </div>
 
 
-            <div class="project-info">
+            <!-- BODY -->
 
-                <div class="project-top">
+            <div class="project-body">
 
-                    <div>
+
+                <!-- ICON -->
+
+                <img
+                    class="project-icon"
+                    src="${icon}"
+                    alt="${name}"
+                    loading="lazy"
+                >
+
+
+                <!-- INFO -->
+
+                <div class="project-info">
+
+                    <div class="project-top">
 
                         <div class="project-name">
-                            ${escapeHTML(project.name)}
+                            ${name}
                         </div>
 
                         <div class="project-category">
-                            ${escapeHTML(
-                                project.category
-                                ?? ""
-                            )}
+                            ${category}
                         </div>
 
                     </div>
 
-                </div>
 
-
-                <div class="project-description">
-
-                    ${escapeHTML(
-                        project.description
-                        ?? ""
-                    )}
-
-                </div>
-
-
-                <div class="project-bottom">
-
-                    <div class="status">
-
-                        <span class="status-dot">
-                        </span>
-
-                        ${escapeHTML(
-                            project.status_text
-                            ?? project.status
-                            ?? ""
-                        )}
-
+                    <div class="project-description">
+                        ${description}
                     </div>
 
-                    <div class="arrow">
-                        →
+
+                    <div class="project-bottom">
+
+                        <div class="status">
+
+                            <span class="status-dot">
+                            </span>
+
+                            ${status}
+
+                        </div>
+
+
+                        <div class="arrow">
+                            →
+                        </div>
+
                     </div>
 
                 </div>
@@ -380,6 +525,9 @@ function createProjectCard(
 }
 
 
+/* =========================
+   ESCAPE
+========================= */
 
 function escapeHTML(
     value
@@ -388,22 +536,27 @@ function escapeHTML(
     return String(
         value ?? ""
     )
+
         .replaceAll(
             "&",
             "&amp;"
         )
+
         .replaceAll(
             "<",
             "&lt;"
         )
+
         .replaceAll(
             ">",
             "&gt;"
         )
+
         .replaceAll(
             '"',
             "&quot;"
         )
+
         .replaceAll(
             "'",
             "&#039;"
@@ -412,5 +565,8 @@ function escapeHTML(
 }
 
 
+/* =========================
+   START
+========================= */
 
 loadPortfolio();
