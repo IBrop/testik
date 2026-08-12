@@ -1,3 +1,7 @@
+/* =========================
+   BASE
+========================= */
+
 * {
     box-sizing: border-box;
 }
@@ -23,7 +27,7 @@ body {
     background:
         radial-gradient(
             circle at top,
-            #242424,
+            #202020,
             #0b0b0b 55%
         );
 }
@@ -34,7 +38,10 @@ body {
 ========================= */
 
 .page {
-    width: min(1250px, calc(100% - 40px));
+    width: min(
+        1250px,
+        calc(100% - 40px)
+    );
 
     margin: 35px auto;
 
@@ -73,6 +80,7 @@ body {
         1px solid rgba(255,255,255,0.08);
 }
 
+
 .logo {
     color: #ffffff;
 
@@ -82,10 +90,12 @@ body {
     text-decoration: none;
 }
 
+
 .navbar nav {
     display: flex;
     gap: 30px;
 }
+
 
 .navbar nav a {
     position: relative;
@@ -94,16 +104,19 @@ body {
         rgba(255,255,255,0.5);
 
     font-size: 14px;
+    font-weight: 600;
 
     text-decoration: none;
 
-    transition: .2s;
+    transition: color .2s;
 }
+
 
 .navbar nav a:hover,
 .navbar nav a.active {
     color: #ffffff;
 }
+
 
 .navbar nav a.active::after {
     content: "";
@@ -129,8 +142,9 @@ body {
 
 .hero {
     padding:
-        90px 60px 75px;
+        85px 60px 70px;
 }
+
 
 .hero-label {
     margin-bottom: 10px;
@@ -145,38 +159,42 @@ body {
     letter-spacing: 2px;
 }
 
+
 .hero h1 {
     margin: 0;
 
     font-size:
-        clamp(70px, 11vw, 150px);
+        clamp(70px, 11vw, 145px);
 
     line-height: .9;
 
     letter-spacing: -7px;
 }
 
+
 .hero p {
     max-width: 600px;
 
-    margin-top: 35px;
+    margin-top: 32px;
 
     color:
         rgba(255,255,255,0.55);
 
     font-size: 20px;
+
     line-height: 1.5;
 }
 
 
 /* =========================
-   SECTIONS
+   PROJECT SECTIONS
 ========================= */
 
 .projects-section {
     padding:
         35px 55px 65px;
 }
+
 
 .section-title {
     display: flex;
@@ -186,15 +204,16 @@ body {
 
     margin-bottom: 30px;
 
-    font-size: 14px;
-
     color:
         rgba(255,255,255,0.4);
+
+    font-size: 14px;
 
     text-transform: uppercase;
 
     letter-spacing: 2px;
 }
+
 
 .line {
     flex: 1;
@@ -219,6 +238,7 @@ body {
     margin-bottom: 30px;
 }
 
+
 .dynamic-filters {
     display: flex;
     flex-wrap: wrap;
@@ -226,9 +246,9 @@ body {
     gap: 10px;
 }
 
+
 .filter {
-    padding:
-        9px 15px;
+    padding: 9px 15px;
 
     color:
         rgba(255,255,255,0.55);
@@ -243,8 +263,11 @@ body {
 
     cursor: pointer;
 
-    transition: .2s;
+    transition:
+        color .2s,
+        background .2s;
 }
+
 
 .filter:hover {
     color: #ffffff;
@@ -252,6 +275,7 @@ body {
     background:
         rgba(255,255,255,0.07);
 }
+
 
 .filter.active {
     color: #111111;
@@ -268,23 +292,22 @@ body {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(2, minmax(0, 1fr));
 
-    gap: 22px;
+    gap: 24px;
 }
 
 
 /* =========================
-   CARD
+   PROJECT CARD
 ========================= */
 
 .project-card {
     position: relative;
 
-    min-height: 380px;
+    display: block;
 
-    display: flex;
-    flex-direction: column;
+    min-width: 0;
 
     overflow: hidden;
 
@@ -301,151 +324,239 @@ body {
     border-radius: 22px;
 
     transition:
-        transform .25s,
-        border-color .25s;
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease;
 }
 
+
 .project-card:hover {
-    transform:
-        translateY(-7px);
+    transform: translateY(-6px);
 
     border-color:
-        rgba(255,255,255,0.2);
+        rgba(255,255,255,0.18);
+
+    background:
+        rgba(255,255,255,0.05);
 }
 
 
 /* =========================
-   VISUAL
+   BANNER
 ========================= */
 
-.project-visual {
+.project-banner {
     position: relative;
 
-    height: 230px;
+    width: 100%;
+
+    /*
+        НИЗКИЙ БАННЕР.
+        Не занимает половину карточки.
+    */
+
+    height: 125px;
 
     overflow: hidden;
 
-    background: #111111;
+    background:
+        #101010;
 }
 
-.project-banner {
+
+.project-banner-image {
+    display: block;
+
     width: 100%;
     height: 100%;
 
     object-fit: cover;
 
-    opacity: .35;
-
-    transform: scale(1.02);
-
     transition:
-        transform .35s,
-        opacity .35s;
+        transform .35s ease,
+        filter .35s ease;
 }
+
 
 .project-card:hover
-.project-banner {
-    opacity: .7;
+.project-banner-image {
+    transform: scale(1.025);
 
-    transform: scale(1.07);
+    filter: brightness(1.08);
 }
+
+
+/* Затемнение снизу */
+
+.project-banner::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 45%,
+            rgba(0,0,0,0.25)
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+.project-body {
+    position: relative;
+
+    min-height: 175px;
+
+    /*
+        Слева оставляем место
+        для круглой иконки.
+    */
+
+    padding:
+        18px 22px 22px 126px;
+}
+
+
+/* =========================
+   ICON
+========================= */
 
 .project-icon {
     position: absolute;
 
     left: 22px;
-    bottom: 22px;
 
-    width: 86px;
-    height: 86px;
+    /*
+        Иконка примерно наполовину
+        заходит на баннер.
+    */
+
+    top: -48px;
+
+    width: 94px;
+    height: 94px;
 
     object-fit: cover;
 
-    border-radius: 18px;
+    border-radius: 50%;
+
+    background: #151515;
+
+    /*
+        Discord-подобная рамка,
+        совпадающая с телом карточки.
+    */
 
     border:
-        1px solid rgba(255,255,255,0.15);
+        6px solid #171717;
 
-    box-shadow:
-        0 15px 30px rgba(0,0,0,0.35);
+    z-index: 3;
 
-    background: #111111;
+    transition:
+        transform .25s ease;
+}
+
+
+.project-card:hover
+.project-icon {
+    transform: scale(1.035);
 }
 
 
 /* =========================
-   INFO
+   PROJECT INFO
 ========================= */
 
 .project-info {
-    flex: 1;
-
-    padding:
-        22px;
+    min-width: 0;
 }
+
 
 .project-top {
     display: flex;
 
-    justify-content:
-        space-between;
+    align-items: center;
 
-    align-items:
-        flex-start;
+    justify-content: space-between;
 
-    gap: 15px;
+    gap: 12px;
 }
+
 
 .project-name {
-    font-size: 25px;
+    min-width: 0;
 
-    font-weight: 700;
+    font-size: 24px;
+
+    font-weight: 750;
+
+    line-height: 1.15;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
 }
+
 
 .project-category {
-    font-size: 11px;
+    flex-shrink: 0;
 
     color:
-        rgba(255,255,255,0.35);
+        rgba(255,255,255,0.3);
 
-    text-transform:
-        uppercase;
+    font-size: 10px;
 
-    letter-spacing: 1px;
-}
+    text-transform: uppercase;
 
-.project-description {
-    margin-top: 15px;
-
-    color:
-        rgba(255,255,255,0.52);
-
-    font-size: 14px;
-
-    line-height: 1.55;
+    letter-spacing: 1.2px;
 }
 
 
 /* =========================
-   STATUS
+   DESCRIPTION
+========================= */
+
+.project-description {
+    margin-top: 12px;
+
+    color:
+        rgba(255,255,255,0.5);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   BOTTOM
 ========================= */
 
 .project-bottom {
     display: flex;
 
-    justify-content:
-        space-between;
+    align-items: center;
 
-    align-items:
-        center;
+    justify-content: space-between;
 
     gap: 15px;
 
-    margin-top: 22px;
+    margin-top: 18px;
 }
 
+
 .status {
-    display: flex;
+    display: inline-flex;
 
     align-items: center;
 
@@ -457,32 +568,36 @@ body {
     font-size: 12px;
 }
 
+
 .status-dot {
     width: 7px;
     height: 7px;
+
+    flex-shrink: 0;
 
     border-radius: 50%;
 
     background: currentColor;
 }
 
+
 .arrow {
     color:
-        rgba(255,255,255,0.4);
+        rgba(255,255,255,0.35);
 
-    font-size: 19px;
+    font-size: 20px;
 
     transition:
-        transform .2s,
-        color .2s;
+        color .2s,
+        transform .2s;
 }
+
 
 .project-card:hover
 .arrow {
-    color: white;
+    color: #ffffff;
 
-    transform:
-        translateX(4px);
+    transform: translateX(4px);
 }
 
 
@@ -493,26 +608,44 @@ body {
 .pin {
     position: absolute;
 
-    top: 16px;
-    right: 16px;
+    top: 14px;
+    right: 14px;
 
-    z-index: 2;
+    z-index: 5;
 
-    padding:
-        6px 10px;
+    padding: 6px 10px;
 
-    font-size: 11px;
+    color:
+        rgba(255,255,255,0.85);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .7px;
 
     background:
-        rgba(0,0,0,0.55);
+        rgba(10,10,10,0.68);
 
     border:
-        1px solid rgba(255,255,255,0.1);
+        1px solid rgba(255,255,255,0.11);
 
     border-radius: 999px;
 
-    backdrop-filter:
-        blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 
@@ -520,56 +653,81 @@ body {
    MOBILE
 ========================= */
 
-@media
-(max-width: 950px) {
-
-    .projects-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-}
-
-
-@media
-(max-width: 650px) {
+@media (max-width: 650px) {
 
     .page {
         width:
             calc(100% - 20px);
 
-        margin:
-            10px auto;
+        margin: 10px auto;
 
         border-radius: 18px;
     }
 
-    .navbar {
-        padding:
-            0 20px;
 
-        gap: 30px;
+    .navbar {
+        padding: 0 20px;
+
+        gap: 28px;
 
         overflow-x: auto;
     }
 
+
     .hero {
         padding:
-            70px 25px 55px;
+            65px 25px 50px;
     }
+
 
     .hero h1 {
         letter-spacing: -4px;
     }
 
-    .projects-section {
-        padding:
-            30px 25px 50px;
+
+    .hero p {
+        font-size: 17px;
     }
 
-    .projects-grid {
-        grid-template-columns:
-            1fr;
+
+    .projects-section {
+        padding:
+            30px 20px 50px;
+    }
+
+
+    .project-banner {
+        height: 105px;
+    }
+
+
+    .project-body {
+        min-height: 185px;
+
+        padding:
+            55px 18px 20px;
+    }
+
+
+    /*
+        На узком телефоне имя уже
+        переносим ПОД иконку.
+    */
+
+    .project-icon {
+        left: 18px;
+
+        top: -43px;
+
+        width: 84px;
+        height: 84px;
+
+        border-width: 5px;
+    }
+
+
+    .project-name {
+        font-size: 22px;
     }
 
 }
