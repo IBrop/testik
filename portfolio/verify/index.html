@@ -3,118 +3,416 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Verify — IBrop</title>
 
-    <title>
-        Verify — IBrop
-    </title>
-
-    <style>
-
-        body {
-            margin: 0;
-
-            min-height: 100vh;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-family:
-                Inter,
-                sans-serif;
-
-            color: white;
-
-            background:
-                #090909;
-        }
-
-
-        .project {
-            width:
-                min(
-                    900px,
-                    calc(100% - 40px)
-                );
-        }
-
-
-        .back {
-            color:
-                rgba(255,255,255,.45);
-
-            text-decoration: none;
-        }
-
-
-        h1 {
-            margin:
-                50px 0 20px;
-
-            font-size:
-                clamp(
-                    70px,
-                    14vw,
-                    170px
-                );
-
-            letter-spacing:
-                -8px;
-
-            line-height:
-                .8;
-        }
-
-
-        p {
-            max-width: 650px;
-
-            color:
-                rgba(255,255,255,.55);
-
-            font-size: 21px;
-
-            line-height: 1.6;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="/portfolio/verify/style.css">
 </head>
 
 <body>
 
-<div class="project">
+<div class="page">
 
-    <a
-        class="back"
-        href="/portfolio/"
-    >
-        ← Портфолио
-    </a>
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-    <h1>
-        Verify
-    </h1>
+    <header class="navbar">
 
-    <p>
-        Verify — проект системы верификации,
-        доверия и безопасного взаимодействия
-        между пользователями, устройствами
-        и серверами.
-    </p>
+        <a class="logo" href="/">
+            IBrop
+        </a>
 
-    <p>
-        Эта страница пока строится.
-    </p>
+        <nav>
+            <a href="/">
+                Обо мне
+            </a>
+
+            <a href="/portfolio/">
+                Портфолио
+            </a>
+
+            <a class="active" href="/portfolio/verify/">
+                Verify
+            </a>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-background"></div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <a
+                class="back-link"
+                href="/portfolio/"
+            >
+                ← Назад в портфолио
+            </a>
+
+            <div class="hero-badge">
+                Security Project
+            </div>
+
+            <h1>
+                Verify
+            </h1>
+
+            <p class="hero-description">
+                Система верификации, доверия и защиты пользователей,
+                устройств и серверов.
+            </p>
+
+            <div class="hero-meta">
+
+                <div class="status">
+                    <span class="status-dot"></span>
+                    In Development
+                </div>
+
+                <div class="meta-item">
+                    2026
+                </div>
+
+                <div class="meta-item">
+                    IBrop
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONTENT
+    ========================== -->
+
+    <main class="content">
+
+
+        <!-- =========================
+             ABOUT
+        ========================== -->
+
+        <section class="content-section">
+
+            <div class="section-label">
+                01 / О проекте
+            </div>
+
+            <div class="section-grid">
+
+                <h2>
+                    Что такое Verify
+                </h2>
+
+                <div class="section-text">
+
+                    <p>
+                        Verify — это проект системы доверенной верификации,
+                        которая создавалась для проверки пользователей,
+                        устройств и взаимодействия между несколькими серверами.
+                    </p>
+
+                    <p>
+                        Главная идея проекта — не полагаться только на один
+                        пароль, один IP-адрес или один сервер. Вместо этого
+                        система использует несколько этапов проверки,
+                        challenge-response, подписи и отдельные уровни доверия.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STORY
+        ========================== -->
+
+        <section class="content-section">
+
+            <div class="section-label">
+                02 / История
+            </div>
+
+            <div class="section-grid">
+
+                <h2>
+                    Как появился Verify
+                </h2>
+
+                <div class="section-text">
+
+                    <p>
+                        Изначально Verify задумывался как система верификации
+                        для Discord-сервера, которая могла бы лучше защищать
+                        сервер от обхода банов и повторной регистрации.
+                    </p>
+
+                    <p>
+                        Постепенно идея выросла в полноценную систему:
+                        появились несколько серверов, отдельный Vault,
+                        challenge-response, подписи, резервные каналы
+                        и собственная логика доверия.
+                    </p>
+
+                    <p>
+                        Позже часть этой архитектуры выросла в отдельную
+                        библиотеку TriSec.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FEATURES
+        ========================== -->
+
+        <section class="content-section">
+
+            <div class="section-label">
+                03 / Возможности
+            </div>
+
+            <h2 class="wide-title">
+                Основные идеи проекта
+            </h2>
+
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+
+                    <div class="feature-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Device Verification
+                    </h3>
+
+                    <p>
+                        Проверка устройства и создание доверенной
+                        связи между клиентом и системой.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Challenge-Response
+                    </h3>
+
+                    <p>
+                        Сервер выдаёт challenge, а клиент подтверждает
+                        владение ключом через подпись.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Multi-Server
+                    </h3>
+
+                    <p>
+                        Verify проектировался как система из нескольких
+                        серверов с разделёнными задачами.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Emergency Channel
+                    </h3>
+
+                    <p>
+                        Резервная архитектура для работы системы
+                        при сбоях основных каналов.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ARCHITECTURE
+        ========================== -->
+
+        <section class="content-section">
+
+            <div class="section-label">
+                04 / Архитектура
+            </div>
+
+            <h2 class="wide-title">
+                Как устроена система
+            </h2>
+
+
+            <div class="architecture">
+
+                <div class="architecture-node">
+                    Sender
+                </div>
+
+                <div class="architecture-arrow">
+                    →
+                </div>
+
+                <div class="architecture-node">
+                    Server 1
+                </div>
+
+                <div class="architecture-arrow">
+                    →
+                </div>
+
+                <div class="architecture-node">
+                    Server 2
+                </div>
+
+                <div class="architecture-arrow">
+                    →
+                </div>
+
+                <div class="architecture-node">
+                    Server 3
+                </div>
+
+            </div>
+
+
+            <div class="architecture-note">
+
+                <strong>Vault</strong>
+
+                <span>
+                    хранит доверенные ключи и данные устройств
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATUS
+        ========================== -->
+
+        <section class="content-section final-section">
+
+            <div class="section-label">
+                05 / Сейчас
+            </div>
+
+            <div class="section-grid">
+
+                <h2>
+                    Статус проекта
+                </h2>
+
+                <div class="section-text">
+
+                    <p>
+                        Verify находится в активной разработке.
+                        Архитектура и базовые механизмы уже существуют,
+                        но проект ещё продолжает развиваться.
+                    </p>
+
+                    <div class="progress-block">
+
+                        <div class="progress-top">
+
+                            <span>
+                                Development
+                            </span>
+
+                            <span>
+                                In Progress
+                            </span>
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div class="progress-value"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <span>
+            Verify / IBrop
+        </span>
+
+        <a href="/portfolio/">
+            Вернуться в портфолио →
+        </a>
+
+    </footer>
 
 </div>
+
+
+<script src="/portfolio/verify/script.js"></script>
 
 </body>
 
