@@ -1,4 +1,4 @@
-const PORTFOLIO_URL = "/data/portfolio.json";
+const PORTFOLIO_URL = "https://ibrop.dev/data/portfolio.json";
 
 let projects = [];
 let activeFilter = "all";
