@@ -14,7 +14,6 @@
     "visible": true,
     "order": 1
   },
-
   {
     "id": "neolite",
     "name": "NeoLite",
