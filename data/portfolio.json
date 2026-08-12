@@ -3,7 +3,7 @@
     "id": "verify",
     "name": "Verify",
     "description": "Система верификации, доверия и защиты пользователей.",
-    "icon": "/assets/portfolio/verify/icon.png",
+    "icon": "/assets/verify.png",
     "banner": "/assets/portfolio/verify/banner.png",
     "url": "/portfolio/verify/",
     "favorite": true,
