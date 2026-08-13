@@ -65,7 +65,7 @@
     "id": "site",
     "name": "Этот сайт",
     "description": "Буквально этот сайт, на котором вы сейчас.",
-    "icon": "/assets/icon.png",
+    "icon": "assets/favicon.png",
     "banner": "/assets/banner.png",
     "url": "https://ibrop.dev",
     "podium": 1,
