@@ -8,7 +8,7 @@
     "url": "/portfolio/verify/",
     "podium": 2,
     "pinned": true,
-    "status": "development",
+    "status": "active",
     "status_text": "In Development",
     "category": "Security",
     "tags": [
@@ -51,7 +51,7 @@
     "podium": 3,
     "pinned": true,
     "status": "development",
-    "status_text": "In Development",
+    "status_text": "Active Development",
     "category": "Security",
     "tags": [
       "Python",
