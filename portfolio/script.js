@@ -1,19 +1,51 @@
-const PORTFOLIO_URL = "https://ibrop.dev/data/portfolio.json";
+/* =========================================================
+   IBrop Portfolio
+========================================================= */
 
-let projects = [];
-let activeFilter = "all";
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const PORTFOLIO_DATA_URL = "/data/portfolio.json";
+
+const DEFAULT_BANNER = "/assets/banner.png";
+const DEFAULT_ICON = "/assets/favicon.png";
 
 
-/* =========================
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let allProjects = [];
+
+let currentFilter = "all";
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadPortfolio();
+
+    }
+);
+
+
+/* =========================================================
    LOAD PORTFOLIO
-========================= */
+========================================================= */
 
 async function loadPortfolio() {
 
     try {
 
         const response = await fetch(
-            PORTFOLIO_URL,
+            PORTFOLIO_DATA_URL,
             {
                 cache: "no-store"
             }
@@ -41,24 +73,25 @@ async function loadPortfolio() {
         }
 
 
-        projects = data
+        /*
+            Оставляем только видимые проекты.
+        */
+
+        allProjects = data
             .filter(
                 project =>
                     project.visible !== false
             )
-            .sort(
-                (a, b) =>
-                    (a.order ?? 999)
-                    -
-                    (b.order ?? 999)
-            );
+            .sort(sortProjects);
 
 
-        buildFilters();
+        renderPinnedProjects();
 
-        renderPinned();
+        renderAllProjects();
 
-        renderAll();
+        renderFilters();
+
+        setupFilterButtons();
 
     }
 
@@ -70,198 +103,41 @@ async function loadPortfolio() {
         );
 
 
-        showError(
-            "Не удалось загрузить проекты"
-        );
+        showPortfolioError();
 
     }
 
 }
 
 
-/* =========================
-   ERROR
-========================= */
+/* =========================================================
+   SORT PROJECTS
+========================================================= */
 
-function showError(message) {
+function sortProjects(a, b) {
 
-    const pinnedSection =
-        document.getElementById(
-            "pinned-section"
-        );
-
-
-    const allProjects =
-        document.getElementById(
-            "all-projects"
-        );
+    const orderA =
+        Number.isFinite(Number(a.order))
+            ? Number(a.order)
+            : 999999;
 
 
-    if (pinnedSection) {
-
-        pinnedSection.style.display =
-            "none";
-
-    }
+    const orderB =
+        Number.isFinite(Number(b.order))
+            ? Number(b.order)
+            : 999999;
 
 
-    if (allProjects) {
-
-        allProjects.innerHTML = `
-
-            <div class="load-error">
-                ${escapeHTML(message)}
-            </div>
-
-        `;
-
-    }
+    return orderA - orderB;
 
 }
 
 
-/* =========================
-   FILTERS
-========================= */
+/* =========================================================
+   PINNED PROJECTS
+========================================================= */
 
-function buildFilters() {
-
-    const container =
-        document.getElementById(
-            "dynamic-filters"
-        );
-
-
-    if (!container) {
-
-        return;
-
-    }
-
-
-    container.innerHTML = "";
-
-
-    const categories = [
-        ...new Set(
-            projects
-                .map(
-                    project =>
-                        project.category
-                )
-                .filter(
-                    category =>
-                        typeof category === "string"
-                        &&
-                        category.trim() !== ""
-                )
-        )
-    ];
-
-
-    categories.forEach(
-        category => {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.type =
-                "button";
-
-
-            button.className =
-                "filter";
-
-
-            button.dataset.filter =
-                category;
-
-
-            button.textContent =
-                category;
-
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    setFilter(
-                        category
-                    );
-
-                }
-            );
-
-
-            container.appendChild(
-                button
-            );
-
-        }
-    );
-
-
-    const allButton =
-        document.querySelector(
-            '[data-filter="all"]'
-        );
-
-
-    if (allButton) {
-
-        allButton.onclick =
-            () => {
-
-                setFilter(
-                    "all"
-                );
-
-            };
-
-    }
-
-}
-
-
-/* =========================
-   SET FILTER
-========================= */
-
-function setFilter(filter) {
-
-    activeFilter = filter;
-
-
-    document
-        .querySelectorAll(
-            ".filter"
-        )
-        .forEach(
-            button => {
-
-                button.classList.toggle(
-                    "active",
-                    button.dataset.filter
-                    === activeFilter
-                );
-
-            }
-        );
-
-
-    renderAll();
-
-}
-
-
-/* =========================
-   PINNED
-========================= */
-
-function renderPinned() {
+function renderPinnedProjects() {
 
     const section =
         document.getElementById(
@@ -275,57 +151,75 @@ function renderPinned() {
         );
 
 
-    if (
-        !section ||
-        !container
-    ) {
+    if (!container) {
 
         return;
 
     }
 
 
-    const pinned =
-        projects.filter(
+    const pinnedProjects =
+        allProjects.filter(
             project =>
                 project.pinned === true
         );
 
 
-    if (
-        pinned.length === 0
-    ) {
+    container.innerHTML = "";
 
-        section.style.display =
-            "none";
+
+    /*
+        Если закреплённых проектов нет,
+        скрываем весь раздел.
+    */
+
+    if (pinnedProjects.length === 0) {
+
+        if (section) {
+
+            section.style.display =
+                "none";
+
+        }
 
         return;
 
     }
 
 
-    section.style.display = "";
+    if (section) {
+
+        section.style.display =
+            "";
+
+    }
 
 
-    container.innerHTML =
-        pinned
-            .map(
-                project =>
-                    createProjectCard(
-                        project,
-                        true
-                    )
-            )
-            .join("");
+    pinnedProjects.forEach(
+        project => {
+
+            container.insertAdjacentHTML(
+                "beforeend",
+                createProjectCard(
+                    project,
+                    true
+                )
+            );
+
+        }
+    );
+
+
+    setupImageFallbacks(container);
 
 }
 
 
-/* =========================
+/* =========================================================
    ALL PROJECTS
-========================= */
+========================================================= */
 
-function renderAll() {
+function renderAllProjects() {
 
     const container =
         document.getElementById(
@@ -340,32 +234,40 @@ function renderAll() {
     }
 
 
-    let filteredProjects =
-        projects;
+    let projects =
+        [...allProjects];
 
 
-    if (
-        activeFilter !== "all"
-    ) {
+    /*
+        Фильтрация по категории.
+    */
 
-        filteredProjects =
+    if (currentFilter !== "all") {
+
+        projects =
             projects.filter(
                 project =>
-                    project.category
-                    === activeFilter
+                    normalizeCategory(
+                        project.category
+                    )
+                    ===
+                    currentFilter
             );
 
     }
 
 
-    if (
-        filteredProjects.length === 0
-    ) {
+    container.innerHTML = "";
+
+
+    if (projects.length === 0) {
 
         container.innerHTML = `
 
-            <div class="load-error">
-                В этой категории пока нет проектов.
+            <div class="projects-empty">
+
+                Здесь пока ничего нет.
+
             </div>
 
         `;
@@ -375,180 +277,228 @@ function renderAll() {
     }
 
 
-    container.innerHTML =
-        filteredProjects
-            .map(
-                project =>
-                    createProjectCard(
-                        project,
-                        false
-                    )
-            )
-            .join("");
+    projects.forEach(
+        project => {
+
+            container.insertAdjacentHTML(
+                "beforeend",
+                createProjectCard(
+                    project,
+                    false
+                )
+            );
+
+        }
+    );
+
+
+    setupImageFallbacks(container);
 
 }
 
 
-/* =========================
+/* =========================================================
    CREATE PROJECT CARD
-========================= */
+========================================================= */
 
 function createProjectCard(
     project,
-    showPin
+    pinnedCard = false
 ) {
 
+    /* =====================================================
+       DATA
+    ====================================================== */
+
     const id =
-        project.id
-        ??
-        project.slug
-        ??
-        "project";
+        project.id ||
+        "";
 
 
     const name =
-        project.name
-        ??
+        project.name ||
         "Без названия";
 
 
     const description =
-        project.description
-        ??
+        project.description ||
         "";
 
 
     const category =
-        project.category
-        ??
-        "";
+        project.category ||
+        "Other";
 
 
-    const status =
-        project.status_text
-        ??
-        project.status
-        ??
-        "";
+    const statusText =
+        project.status_text ||
+        project.status ||
+        "Unknown";
 
 
-    const icon =
-        project.icon
-        ??
-        "/assets/projects/default.png";
+    /*
+        Если banner:
 
+        - отсутствует
+        - null
+        - ""
+        - undefined
+
+        используем стандартный баннер.
+    */
 
     const banner =
         project.banner
-        ??
-        icon;
+            ? project.banner
+            : DEFAULT_BANNER;
 
+
+    /*
+        То же самое с иконкой.
+    */
+
+    const icon =
+        project.icon
+            ? project.icon
+            : DEFAULT_ICON;
+
+
+    /*
+        Если URL не задан,
+        автоматически создаём:
+
+        /portfolio/project-id/
+    */
 
     const url =
         project.url
-        ??
-        `/portfolio/${id}/`;
+        ||
+        (
+            id
+                ? `/portfolio/${id}/`
+                : "/portfolio/"
+        );
 
 
-    const pinBadge =
-        showPin
+    /* =====================================================
+       PINNED LABEL
+    ====================================================== */
+
+    const pinnedBadge =
+        pinnedCard
             ? `
-                <div class="pin">
+                <div class="project-pinned-badge">
                     Закреплено
                 </div>
-              `
+            `
             : "";
 
+
+    /* =====================================================
+       HTML
+    ====================================================== */
 
     return `
 
         <a
             class="project-card"
             href="${escapeHTML(url)}"
+            data-category="${escapeHTML(
+                normalizeCategory(category)
+            )}"
         >
 
-            ${pinBadge}
-
+            <!-- =============================
+                 BANNER
+            ============================== -->
 
             <div class="project-banner">
 
                 <img
                     class="project-banner-image"
                     src="${escapeHTML(banner)}"
+                    data-fallback="${escapeHTML(DEFAULT_BANNER)}"
                     alt=""
                     loading="lazy"
                 >
 
+
+                ${pinnedBadge}
+
             </div>
 
 
-            <div class="project-body">
+            <!-- =============================
+                 PROJECT CONTENT
+            ============================== -->
 
+            <div class="project-content">
+
+
+                <!-- ICON -->
 
                 <img
                     class="project-icon"
                     src="${escapeHTML(icon)}"
+                    data-fallback="${escapeHTML(DEFAULT_ICON)}"
                     alt="${escapeHTML(name)}"
                     loading="lazy"
                 >
 
 
+                <!-- INFO -->
+
                 <div class="project-info">
 
 
-                    <div class="project-top">
+                    <div class="project-heading">
 
-                        <div class="project-name">
+                        <h3>
                             ${escapeHTML(name)}
-                        </div>
+                        </h3>
 
 
-                        ${
-                            category
-                                ? `
-                                    <div class="project-category">
-                                        ${escapeHTML(category)}
-                                    </div>
-                                  `
-                                : ""
-                        }
+                        <span class="project-category">
+
+                            ${escapeHTML(category)}
+
+                        </span>
 
                     </div>
 
 
-                    ${
-                        description
-                            ? `
-                                <div class="project-description">
-                                    ${escapeHTML(description)}
-                                </div>
-                              `
-                            : ""
-                    }
+                    <p class="project-description">
+
+                        ${escapeHTML(description)}
+
+                    </p>
 
 
                     <div class="project-bottom">
 
-                        ${
-                            status
-                                ? `
-                                    <div class="status">
 
-                                        <span class="status-dot"></span>
+                        <div
+                            class="
+                                project-status
+                                status-${escapeHTML(
+                                    normalizeStatus(
+                                        project.status
+                                    )
+                                )}
+                            "
+                        >
 
-                                        ${escapeHTML(status)}
+                            <span class="status-dot"></span>
 
-                                    </div>
-                                  `
-                                : `
-                                    <div></div>
-                                  `
-                        }
+                            ${escapeHTML(statusText)}
+
+                        </div>
 
 
-                        <div class="arrow">
+                        <div class="project-arrow">
                             →
                         </div>
+
 
                     </div>
 
@@ -563,9 +513,396 @@ function createProjectCard(
 }
 
 
-/* =========================
+/* =========================================================
+   FILTERS
+========================================================= */
+
+function renderFilters() {
+
+    const container =
+        document.getElementById(
+            "dynamic-filters"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    /*
+        Берём категории всех проектов.
+    */
+
+    const categoryMap =
+        new Map();
+
+
+    allProjects.forEach(
+        project => {
+
+            const category =
+                project.category ||
+                "Other";
+
+
+            const normalized =
+                normalizeCategory(
+                    category
+                );
+
+
+            /*
+                Map нужен, чтобы:
+
+                Security
+                SECURITY
+                security
+
+                не превращались
+                в три разных фильтра.
+            */
+
+            if (!categoryMap.has(normalized)) {
+
+                categoryMap.set(
+                    normalized,
+                    category
+                );
+
+            }
+
+        }
+    );
+
+
+    container.innerHTML = "";
+
+
+    categoryMap.forEach(
+        (
+            displayName,
+            normalized
+        ) => {
+
+            container.insertAdjacentHTML(
+                "beforeend",
+                `
+
+                    <button
+                        class="filter"
+                        data-filter="${escapeHTML(normalized)}"
+                    >
+
+                        ${escapeHTML(displayName)}
+
+                    </button>
+
+                `
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FILTER BUTTONS
+========================================================= */
+
+function setupFilterButtons() {
+
+    const buttons =
+        document.querySelectorAll(
+            ".filter"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const filter =
+                        button.dataset.filter
+                        ||
+                        "all";
+
+
+                    currentFilter =
+                        filter;
+
+
+                    /*
+                        Убираем active
+                        со всех кнопок.
+                    */
+
+                    buttons.forEach(
+                        item => {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    /*
+                        Добавляем active
+                        выбранной кнопке.
+                    */
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    /*
+                        Перерисовываем
+                        список проектов.
+                    */
+
+                    renderAllProjects();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE FALLBACKS
+========================================================= */
+
+function setupImageFallbacks(root = document) {
+
+    const images =
+        root.querySelectorAll(
+            "img[data-fallback]"
+        );
+
+
+    images.forEach(
+        image => {
+
+            /*
+                Чтобы случайно не повесить
+                обработчик два раза.
+            */
+
+            if (
+                image.dataset.fallbackReady
+                ===
+                "true"
+            ) {
+
+                return;
+
+            }
+
+
+            image.dataset.fallbackReady =
+                "true";
+
+
+            image.addEventListener(
+                "error",
+                () => {
+
+                    const fallback =
+                        image.dataset.fallback;
+
+
+                    if (!fallback) {
+
+                        return;
+
+                    }
+
+
+                    /*
+                        Проверяем, не пытаемся ли
+                        мы уже загрузить fallback.
+
+                        Иначе при отсутствии
+                        /assets/banner.png
+                        получится бесконечный цикл.
+                    */
+
+                    const currentPath =
+                        new URL(
+                            image.src,
+                            window.location.origin
+                        ).pathname;
+
+
+                    const fallbackPath =
+                        new URL(
+                            fallback,
+                            window.location.origin
+                        ).pathname;
+
+
+                    if (
+                        currentPath
+                        ===
+                        fallbackPath
+                    ) {
+
+                        console.error(
+                            "Fallback изображение тоже не найдено:",
+                            fallback
+                        );
+
+                        return;
+
+                    }
+
+
+                    console.warn(
+                        "Изображение не найдено:",
+                        currentPath,
+                        "→",
+                        fallback
+                    );
+
+
+                    image.src =
+                        fallback;
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   NORMALIZE CATEGORY
+========================================================= */
+
+function normalizeCategory(category) {
+
+    return String(
+        category ||
+        "Other"
+    )
+        .trim()
+        .toLowerCase()
+        .replaceAll(
+            " ",
+            "-"
+        );
+
+}
+
+
+/* =========================================================
+   NORMALIZE STATUS
+========================================================= */
+
+function normalizeStatus(status) {
+
+    const value =
+        String(
+            status ||
+            "unknown"
+        )
+            .trim()
+            .toLowerCase();
+
+
+    /*
+        Разрешённые статусы.
+    */
+
+    const allowedStatuses = [
+
+        "concept",
+        "development",
+        "beta",
+        "active",
+        "released",
+        "maintenance",
+        "paused",
+        "archived"
+
+    ];
+
+
+    if (
+        allowedStatuses.includes(
+            value
+        )
+    ) {
+
+        return value;
+
+    }
+
+
+    return "unknown";
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showPortfolioError() {
+
+    const pinned =
+        document.getElementById(
+            "pinned-projects"
+        );
+
+
+    const all =
+        document.getElementById(
+            "all-projects"
+        );
+
+
+    if (pinned) {
+
+        pinned.innerHTML = "";
+
+    }
+
+
+    if (all) {
+
+        all.innerHTML = `
+
+            <div class="projects-empty">
+
+                Не удалось загрузить проекты :(
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
    ESCAPE HTML
-========================= */
+========================================================= */
 
 function escapeHTML(value) {
 
@@ -599,17 +936,3 @@ function escapeHTML(value) {
         );
 
 }
-
-
-/* =========================
-   START
-========================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        loadPortfolio();
-
-    }
-);
