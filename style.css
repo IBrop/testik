@@ -176,7 +176,8 @@ body {
 
 
 .navbar-links a.active::after {
-    content: "";
+    content:
+        "";
 
     position:
         absolute;
@@ -351,9 +352,157 @@ body {
 }
 
 
+/* =========================
+   SOCIAL LINKS
+========================= */
+
+.social-links {
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        10px;
+
+    margin-top:
+        20px;
+}
+
+
+.social-link {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        9px 13px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.62
+        );
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+    text-decoration:
+        none;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.035
+        );
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.075
+        );
+
+    border-radius:
+        999px;
+
+    transition:
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+
+.social-link:hover {
+    color:
+        #ffffff;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.16
+        );
+
+    transform:
+        translateY(-2px);
+}
+
+
+.social-icon {
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        16px;
+
+    height:
+        16px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.5
+        );
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    transition:
+        color .2s;
+}
+
+
+.social-link:hover
+.social-icon {
+    color:
+        #ffffff;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
 .profile-description {
     margin-top:
-        38px;
+        30px;
 
     max-width:
         640px;
@@ -808,8 +957,6 @@ body {
 }
 
 
-/* 1 место выше */
-
 .podium-item.place-1 {
     transform:
         translateY(-38px);
@@ -887,7 +1034,7 @@ body {
 
 
 /* =========================
-   PROJECT CARD
+   PODIUM PROJECT
 ========================= */
 
 .podium-project {
@@ -949,7 +1096,7 @@ body {
 
 
 /* =========================
-   BANNER
+   PODIUM BANNER
 ========================= */
 
 .podium-banner {
@@ -993,7 +1140,7 @@ body {
 
 
 /* =========================
-   PROJECT BODY
+   PODIUM BODY
 ========================= */
 
 .podium-project-body {
@@ -1342,6 +1489,12 @@ body {
     }
 
 
+    .social-links {
+        justify-content:
+            center;
+    }
+
+
     .profile-description {
         margin-left:
             auto;
@@ -1377,11 +1530,6 @@ body {
             column;
     }
 
-
-    /*
-        На телефоне пьедестал
-        становится вертикальным.
-    */
 
     .podium {
         grid-template-columns:
@@ -1456,6 +1604,15 @@ body {
     .navbar-links {
         gap:
             22px;
+    }
+
+
+    .social-link {
+        padding:
+            8px 11px;
+
+        font-size:
+            11px;
     }
 
 }
