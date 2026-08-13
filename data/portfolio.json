@@ -6,7 +6,7 @@
     "icon": "https://ibrop.dev/assets/projects/verify.png",
     "banner": "/assets/portfolio/verify/banner.png",
     "url": "/portfolio/verify/",
-    "favorite": true,
+    "podium": 2,
     "pinned": true,
     "status": "development",
     "status_text": "In Development",
@@ -17,7 +17,8 @@
       "Networking"
     ],
     "visible": true,
-    "order": 1
+    "order": 2
+    
   },
 
   {
@@ -27,7 +28,7 @@
     "icon": "/assets/portfolio/neolite/icon.png",
     "banner": "/assets/portfolio/neolite/banner.png",
     "url": "/portfolio/neolite/",
-    "favorite": true,
+    "podium": 0,
     "pinned": true,
     "status": "development",
     "status_text": "In Development",
@@ -37,9 +38,52 @@
       "Python"
     ],
     "visible": true,
-    "order": 2
+    "order": 4
+  },
+  
+  {
+    "id": "trisec",
+    "name": "TriSec",
+    "description": "Система быстрой и безопастной передачи данных.",
+    "icon": "/assets/portfolio/trisec/icon.png",
+    "banner": "/assets/portfolio/trisec/banner.png",
+    "url": "/portfolio/trisec/",
+    "podium": 3,
+    "pinned": true,
+    "status": "development",
+    "status_text": "In Development",
+    "category": "Security",
+    "tags": [
+      "Python",
+      "trisec"
+    ],
+    "visible": true,
+    "order": 3
   },
 
+  {
+    "id": "site",
+    "name": "Этот сайт",
+    "description": "Буквально этот сайт, на котором вы сейчас.",
+    "icon": "/assets/icon.png",
+    "banner": "/assets/banner.png",
+    "url": "https://ibrop.dev",
+    "podium": 1,
+    "pinned": true,
+    "status": "active",
+    "status_text": "Active Development",
+    "category": "Other",
+    "tags": [
+      "Python",
+      "Html",
+      "css",
+      "JavaScript",
+      "Site"
+    ],
+    "visible": true,
+    "order": 1
+  },
+  
   {
     "id": "future-project",
     "name": "Future Project",
