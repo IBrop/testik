@@ -1,6 +1,11 @@
-/* =========================
+/* =========================================================
+   IBrop Main Page
+========================================================= */
+
+
+/* =========================================================
    PROFILE
-========================= */
+========================================================= */
 
 async function loadProfile() {
 
@@ -8,11 +13,17 @@ async function loadProfile() {
 
         const response =
             await fetch(
-                "/data/profile.json"
+                "/data/profile.json",
+                {
+                    cache:
+                        "no-store"
+                }
             );
 
 
-        if (!response.ok) {
+        if (
+            !response.ok
+        ) {
 
             throw new Error(
                 `HTTP ${response.status}`
@@ -46,12 +57,6 @@ async function loadProfile() {
         const avatar =
             document.getElementById(
                 "profile-avatar"
-            );
-
-
-        const projectsTitle =
-            document.getElementById(
-                "projects-title"
             );
 
 
@@ -98,20 +103,11 @@ async function loadProfile() {
 
         }
 
-
-        if (
-            projectsTitle &&
-            profile.projects_title
-        ) {
-
-            projectsTitle.textContent =
-                profile.projects_title;
-
-        }
-
     }
 
-    catch (error) {
+    catch (
+        error
+    ) {
 
         console.error(
             "Не удалось загрузить profile.json:",
@@ -123,20 +119,21 @@ async function loadProfile() {
 }
 
 
+/* =========================================================
+   PODIUM
+========================================================= */
 
-/* =========================
-   PROJECTS
-========================= */
-
-async function loadProjects() {
+async function loadPodium() {
 
     const container =
         document.getElementById(
-            "featured-projects"
+            "podium"
         );
 
 
-    if (!container) {
+    if (
+        !container
+    ) {
 
         return;
 
@@ -147,11 +144,17 @@ async function loadProjects() {
 
         const response =
             await fetch(
-                "/data/portfolio.json"
+                "/data/portfolio.json",
+                {
+                    cache:
+                        "no-store"
+                }
             );
 
 
-        if (!response.ok) {
+        if (
+            !response.ok
+        ) {
 
             throw new Error(
                 `HTTP ${response.status}`
@@ -164,29 +167,39 @@ async function loadProjects() {
             await response.json();
 
 
-        const favoriteProjects =
+        if (
+            !Array.isArray(
+                projects
+            )
+        ) {
+
+            throw new Error(
+                "portfolio.json должен содержать массив проектов"
+            );
+
+        }
+
+
+        const podiumProjects =
             projects
+
                 .filter(
                     project =>
                         project.visible !== false
                         &&
-                        project.favorite === true
+                        (
+                            project.podium === 1
+                            ||
+                            project.podium === 2
+                            ||
+                            project.podium === 3
+                        )
                 )
+
                 .sort(
                     (a, b) =>
-                        (
-                            a.order
-                            ?? 999
-                        )
-                        -
-                        (
-                            b.order
-                            ?? 999
-                        )
-                )
-                .slice(
-                    0,
-                    4
+                        a.podium -
+                        b.podium
                 );
 
 
@@ -194,79 +207,59 @@ async function loadProjects() {
             "";
 
 
-        favoriteProjects.forEach(
+        /*
+            ВАЖНО:
+            визуальный порядок пьедестала:
+            2 | 1 | 3
+        */
+
+
+        const place1 =
+            podiumProjects.find(
+                project =>
+                    project.podium === 1
+            );
+
+
+        const place2 =
+            podiumProjects.find(
+                project =>
+                    project.podium === 2
+            );
+
+
+        const place3 =
+            podiumProjects.find(
+                project =>
+                    project.podium === 3
+            );
+
+
+        const ordered =
+            [
+                place2,
+                place1,
+                place3
+            ];
+
+
+        ordered.forEach(
             project => {
 
-                const card =
-                    document.createElement(
-                        "a"
-                    );
+                if (
+                    !project
+                ) {
+
+                    return;
+
+                }
 
 
-                card.className =
-                    "project-card";
-
-
-                card.href =
-                    project.url
-                    ||
-                    `/portfolio/${project.id}/`;
-
-
-                card.innerHTML = `
-
-                    <img
-                        class="project-icon"
-                        src="${escapeHTML(
-                            project.icon
-                        )}"
-                        alt="${escapeHTML(
-                            project.name
-                        )}"
-                    >
-
-
-                    <div class="project-info">
-
-                        <div class="project-name">
-
-                            ${escapeHTML(
-                                project.name
-                            )}
-
-                        </div>
-
-
-                        <div class="project-description">
-
-                            ${escapeHTML(
-                                project.description
-                                ?? ""
-                            )}
-
-                        </div>
-
-
-                        <div class="project-status">
-
-                            <span class="status-dot"></span>
-
-                            ${escapeHTML(
-                                project.status_text
-                                ??
-                                project.status
-                                ??
-                                ""
-                            )}
-
-                        </div>
-
-                    </div>
-                `;
-
-
-                container.appendChild(
-                    card
+                container.insertAdjacentHTML(
+                    "beforeend",
+                    createPodiumItem(
+                        project
+                    )
                 );
 
             }
@@ -274,31 +267,33 @@ async function loadProjects() {
 
 
         if (
-            favoriteProjects.length === 0
+            container.children.length === 0
         ) {
 
             container.innerHTML = `
-                <p>
-                    Здесь скоро появятся проекты.
-                </p>
+                <div>
+                    Подиум пока пуст.
+                </div>
             `;
 
         }
 
     }
 
-    catch (error) {
+    catch (
+        error
+    ) {
 
         console.error(
-            "Не удалось загрузить portfolio.json:",
+            "Не удалось загрузить podium:",
             error
         );
 
 
         container.innerHTML = `
-            <p>
-                Не удалось загрузить проекты.
-            </p>
+            <div>
+                Не удалось загрузить подиум.
+            </div>
         `;
 
     }
@@ -306,10 +301,126 @@ async function loadProjects() {
 }
 
 
+/* =========================================================
+   CREATE PODIUM ITEM
+========================================================= */
 
-/* =========================
+function createPodiumItem(
+    project
+) {
+
+    const place =
+        Number(
+            project.podium
+        );
+
+
+    const medal =
+        place === 1
+            ? "🥇"
+            : place === 2
+                ? "🥈"
+                : "🥉";
+
+
+    const name =
+        project.name
+        ??
+        "Без названия";
+
+
+    const description =
+        project.description
+        ??
+        "";
+
+
+    const icon =
+        project.icon
+        ??
+        "/assets/projects/default.png";
+
+
+    const banner =
+        project.banner
+        ??
+        icon;
+
+
+    const url =
+        project.url
+        ??
+        `/portfolio/${project.id}/`;
+
+
+    return `
+
+        <div
+            class="podium-item place-${place}"
+        >
+
+            <div class="podium-medal">
+                ${medal}
+            </div>
+
+
+            <a
+                class="podium-project"
+                href="${escapeHTML(url)}"
+            >
+
+                <div class="podium-banner">
+
+                    <img
+                        src="${escapeHTML(banner)}"
+                        alt=""
+                    >
+
+                </div>
+
+
+                <div class="podium-project-body">
+
+                    <img
+                        class="podium-icon"
+                        src="${escapeHTML(icon)}"
+                        alt="${escapeHTML(name)}"
+                    >
+
+
+                    <div class="podium-project-name">
+                        ${escapeHTML(name)}
+                    </div>
+
+
+                    <div class="podium-project-description">
+                        ${escapeHTML(description)}
+                    </div>
+
+
+                    <div class="podium-project-arrow">
+                        Открыть проект →
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <div class="podium-base">
+                ${place}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
    EASTER EGG
-========================= */
+========================================================= */
 
 function setupEasterEgg() {
 
@@ -319,15 +430,15 @@ function setupEasterEgg() {
         );
 
 
-    const hotspot =
+    const easterDot =
         document.getElementById(
-            "easterHotspot"
+            "easterDot"
         );
 
 
     if (
         !easterEgg ||
-        !hotspot
+        !easterDot
     ) {
 
         return;
@@ -335,14 +446,7 @@ function setupEasterEgg() {
     }
 
 
-    /*
-        На компьютере работает hover из CSS.
-
-        Нажатие нужно в основном
-        для телефона.
-    */
-
-    hotspot.addEventListener(
+    easterDot.addEventListener(
         "click",
         event => {
 
@@ -358,10 +462,6 @@ function setupEasterEgg() {
         }
     );
 
-
-    /*
-        Клик вне пасхалки закрывает её.
-    */
 
     document.addEventListener(
         "click",
@@ -384,38 +484,12 @@ function setupEasterEgg() {
         }
     );
 
-
-    /*
-        Escape тоже закрывает.
-    */
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key ===
-                "Escape"
-            ) {
-
-                easterEgg
-                    .classList
-                    .remove(
-                        "open"
-                    );
-
-            }
-
-        }
-    );
-
 }
 
 
-
-/* =========================
-   ESCAPE HTML
-========================= */
+/* =========================================================
+   ESCAPE
+========================================================= */
 
 function escapeHTML(
     value
@@ -453,13 +527,19 @@ function escapeHTML(
 }
 
 
-
-/* =========================
+/* =========================================================
    START
-========================= */
+========================================================= */
 
-loadProfile();
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-loadProjects();
+        loadProfile();
 
-setupEasterEgg();
+        loadPodium();
+
+        setupEasterEgg();
+
+    }
+);
