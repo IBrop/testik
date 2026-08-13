@@ -44,12 +44,12 @@ body {
             calc(100% - 40px)
         );
 
-    margin: 35px auto;
+    margin: 18px auto;
 
     overflow: hidden;
 
     background:
-        rgba(14, 14, 14, 0.9);
+        rgba(14, 14, 14, 0.92);
 
     border:
         1px solid
@@ -74,11 +74,13 @@ body {
     height: 72px;
 
     display: flex;
+
     align-items: center;
 
     gap: 50px;
 
-    padding: 0 32px;
+    padding:
+        0 32px;
 
     border-bottom:
         1px solid
@@ -115,7 +117,7 @@ body {
     text-decoration: none;
 
     transition:
-        color .2s;
+        color .2s ease;
 }
 
 
@@ -154,7 +156,7 @@ body {
 
 
 .hero-label {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
     color:
         rgba(255, 255, 255, 0.35);
@@ -172,7 +174,7 @@ body {
 
     font-size:
         clamp(
-            70px,
+            72px,
             10vw,
             140px
         );
@@ -184,7 +186,7 @@ body {
 
 
 .hero p {
-    max-width: 600px;
+    max-width: 650px;
 
     margin-top: 30px;
 
@@ -209,14 +211,15 @@ body {
 
 .section-title {
     display: flex;
+
     align-items: center;
 
     gap: 20px;
 
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 
     color:
-        rgba(255, 255, 255, 0.4);
+        rgba(255, 255, 255, 0.42);
 
     font-size: 14px;
 
@@ -242,16 +245,18 @@ body {
 
 .filter-bar {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 10px;
 
-    margin-bottom: 28px;
+    margin-bottom: 30px;
 }
 
 
 .dynamic-filters {
     display: flex;
+
     flex-wrap: wrap;
 
     gap: 10px;
@@ -277,8 +282,9 @@ body {
     cursor: pointer;
 
     transition:
-        color .2s,
-        background .2s;
+        color .2s ease,
+        background .2s ease,
+        border-color .2s ease;
 }
 
 
@@ -294,6 +300,8 @@ body {
     color: #111111;
 
     background: #ffffff;
+
+    border-color: #ffffff;
 }
 
 
@@ -306,13 +314,11 @@ body {
 
     grid-template-columns:
         repeat(
-            auto-fill,
-            minmax(300px, 360px)
+            3,
+            minmax(0, 1fr)
         );
 
     gap: 24px;
-
-    justify-content: start;
 }
 
 
@@ -325,8 +331,7 @@ body {
 
     display: block;
 
-    width: 100%;
-    max-width: 360px;
+    min-width: 0;
 
     overflow: hidden;
 
@@ -339,7 +344,7 @@ body {
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.09);
+        rgba(255, 255, 255, 0.08);
 
     border-radius: 22px;
 
@@ -371,15 +376,11 @@ body {
 
     width: 100%;
 
-    /*
-        Discord-подобный прямоугольник.
-    */
-
-    aspect-ratio: 2.6 / 1;
+    height: 140px;
 
     overflow: hidden;
 
-    background: #111111;
+    background: #101010;
 }
 
 
@@ -387,6 +388,7 @@ body {
     display: block;
 
     width: 100%;
+
     height: 100%;
 
     object-fit: cover;
@@ -399,9 +401,49 @@ body {
 
 .project-card:hover
 .project-banner-image {
-    transform: scale(1.025);
+    transform:
+        scale(1.025);
 
-    filter: brightness(1.07);
+    filter:
+        brightness(1.06);
+}
+
+
+/* =========================
+   PIN
+========================= */
+
+.pin {
+    position: absolute;
+
+    top: 12px;
+
+    right: 12px;
+
+    z-index: 5;
+
+    padding:
+        5px 9px;
+
+    color:
+        rgba(255, 255, 255, 0.85);
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .7px;
+
+    background:
+        rgba(10, 10, 10, 0.72);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.1);
+
+    border-radius: 999px;
+
+    backdrop-filter: blur(10px);
 }
 
 
@@ -412,10 +454,10 @@ body {
 .project-body {
     position: relative;
 
-    min-height: 170px;
+    min-height: 220px;
 
     padding:
-        18px 18px 20px 108px;
+        34px 18px 22px 106px;
 }
 
 
@@ -427,9 +469,11 @@ body {
     position: absolute;
 
     left: 18px;
-    top: -39px;
+
+    top: -38px;
 
     width: 78px;
+
     height: 78px;
 
     object-fit: cover;
@@ -442,7 +486,11 @@ body {
         5px solid
         #171717;
 
-    z-index: 3;
+    z-index: 4;
+
+    box-shadow:
+        0 6px 18px
+        rgba(0, 0, 0, 0.25);
 
     transition:
         transform .25s ease;
@@ -451,7 +499,8 @@ body {
 
 .project-card:hover
 .project-icon {
-    transform: scale(1.04);
+    transform:
+        scale(1.04);
 }
 
 
@@ -464,10 +513,14 @@ body {
 }
 
 
+/* =========================
+   TOP
+========================= */
+
 .project-top {
     display: flex;
 
-    align-items: center;
+    align-items: flex-start;
 
     justify-content: space-between;
 
@@ -478,10 +531,13 @@ body {
 .project-name {
     min-width: 0;
 
-    font-size: 22px;
+    color: #ffffff;
+
+    font-size: 20px;
+
     font-weight: 750;
 
-    line-height: 1.15;
+    line-height: 1.2;
 
     overflow: hidden;
 
@@ -495,13 +551,15 @@ body {
     flex-shrink: 0;
 
     color:
-        rgba(255, 255, 255, 0.3);
+        rgba(255, 255, 255, 0.28);
 
     font-size: 9px;
 
     text-transform: uppercase;
 
     letter-spacing: 1px;
+
+    padding-top: 5px;
 }
 
 
@@ -510,14 +568,16 @@ body {
 ========================= */
 
 .project-description {
-    margin-top: 10px;
+    margin-top: 12px;
 
     color:
         rgba(255, 255, 255, 0.5);
 
     font-size: 13px;
 
-    line-height: 1.45;
+    line-height: 1.5;
+
+    min-height: 40px;
 }
 
 
@@ -534,7 +594,7 @@ body {
 
     gap: 12px;
 
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
 
@@ -546,14 +606,17 @@ body {
     gap: 7px;
 
     color:
-        rgba(255, 255, 255, 0.44);
+        rgba(255, 255, 255, 0.48);
 
     font-size: 11px;
+
+    line-height: 1.2;
 }
 
 
 .status-dot {
     width: 7px;
+
     height: 7px;
 
     flex-shrink: 0;
@@ -565,14 +628,16 @@ body {
 
 
 .arrow {
+    flex-shrink: 0;
+
     color:
         rgba(255, 255, 255, 0.35);
 
     font-size: 18px;
 
     transition:
-        color .2s,
-        transform .2s;
+        color .2s ease,
+        transform .2s ease;
 }
 
 
@@ -586,50 +651,16 @@ body {
 
 
 /* =========================
-   PIN
+   EMPTY / ERROR
 ========================= */
 
-.pin {
-    position: absolute;
-
-    top: 12px;
-    right: 12px;
-
-    z-index: 5;
+.load-error,
+.projects-empty {
+    grid-column:
+        1 / -1;
 
     padding:
-        5px 9px;
-
-    color:
-        rgba(255, 255, 255, 0.82);
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .7px;
-
-    background:
-        rgba(10, 10, 10, 0.7);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.1);
-
-    border-radius: 999px;
-
-    backdrop-filter: blur(10px);
-}
-
-
-/* =========================
-   ERROR
-========================= */
-
-.load-error {
-    grid-column: 1 / -1;
-
-    padding: 20px;
+        20px;
 
     color:
         rgba(255, 255, 255, 0.45);
@@ -648,13 +679,14 @@ body {
    TABLET
 ========================= */
 
-@media (max-width: 900px) {
+@media
+(max-width: 1050px) {
 
     .projects-grid {
         grid-template-columns:
             repeat(
-                auto-fill,
-                minmax(280px, 340px)
+                2,
+                minmax(0, 1fr)
             );
     }
 
@@ -662,16 +694,18 @@ body {
 
 
 /* =========================
-   MOBILE
+   SMALL TABLET
 ========================= */
 
-@media (max-width: 650px) {
+@media
+(max-width: 760px) {
 
     .page {
         width:
-            calc(100% - 20px);
+            calc(100% - 16px);
 
-        margin: 10px auto;
+        margin:
+            8px auto;
 
         border-radius: 18px;
     }
@@ -681,7 +715,8 @@ body {
         padding:
             0 20px;
 
-        gap: 28px;
+        gap:
+            28px;
 
         overflow-x: auto;
     }
@@ -689,17 +724,19 @@ body {
 
     .hero {
         padding:
-            60px 22px 48px;
+            60px 24px 48px;
     }
 
 
     .hero h1 {
-        letter-spacing: -4px;
+        letter-spacing:
+            -4px;
     }
 
 
     .hero p {
-        font-size: 17px;
+        font-size:
+            17px;
     }
 
 
@@ -710,36 +747,86 @@ body {
 
 
     .projects-grid {
-        grid-template-columns: 1fr;
-
-        gap: 20px;
-    }
-
-
-    .project-card {
-        max-width: none;
+        grid-template-columns:
+            1fr;
     }
 
 
     .project-banner {
-        aspect-ratio: 2.5 / 1;
+        height: 135px;
     }
 
 
     .project-body {
-        min-height: 175px;
+        min-height: 200px;
 
         padding:
-            52px 18px 20px;
+            50px 18px 20px;
     }
 
 
     .project-icon {
         left: 18px;
+
         top: -38px;
 
         width: 76px;
+
         height: 76px;
+    }
+
+
+    .project-top {
+        align-items: center;
+    }
+
+
+    .project-name {
+        font-size: 21px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media
+(max-width: 520px) {
+
+    .navbar nav {
+        gap: 22px;
+    }
+
+
+    .hero {
+        padding-top: 50px;
+    }
+
+
+    .project-banner {
+        height: 120px;
+    }
+
+
+    .project-body {
+        padding:
+            48px 16px 18px;
+    }
+
+
+    .project-icon {
+        width: 72px;
+
+        height: 72px;
+
+        top: -36px;
+    }
+
+
+    .project-category {
+        font-size: 8px;
     }
 
 }
