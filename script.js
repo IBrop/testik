@@ -1,6 +1,14 @@
 /* =========================================================
-   IBrop Main Page
+   IBrop — Main Page
 ========================================================= */
+
+
+/* =========================================================
+   DEFAULT ASSETS
+========================================================= */
+
+const DEFAULT_BANNER = "/assets/banner.png";
+const DEFAULT_ICON = "/assets/favicon.png";
 
 
 /* =========================================================
@@ -11,19 +19,15 @@ async function loadProfile() {
 
     try {
 
-        const response =
-            await fetch(
-                "/data/profile.json",
-                {
-                    cache:
-                        "no-store"
-                }
-            );
+        const response = await fetch(
+            "/data/profile.json",
+            {
+                cache: "no-store"
+            }
+        );
 
 
-        if (
-            !response.ok
-        ) {
+        if (!response.ok) {
 
             throw new Error(
                 `HTTP ${response.status}`
@@ -32,8 +36,7 @@ async function loadProfile() {
         }
 
 
-        const profile =
-            await response.json();
+        const profile = await response.json();
 
 
         const name =
@@ -60,10 +63,7 @@ async function loadProfile() {
             );
 
 
-        if (
-            name &&
-            profile.name
-        ) {
+        if (name && profile.name) {
 
             name.textContent =
                 profile.name;
@@ -71,10 +71,7 @@ async function loadProfile() {
         }
 
 
-        if (
-            subtitle &&
-            profile.subtitle
-        ) {
+        if (subtitle && profile.subtitle) {
 
             subtitle.textContent =
                 profile.subtitle;
@@ -82,10 +79,7 @@ async function loadProfile() {
         }
 
 
-        if (
-            description &&
-            profile.description
-        ) {
+        if (description && profile.description) {
 
             description.textContent =
                 profile.description;
@@ -93,10 +87,7 @@ async function loadProfile() {
         }
 
 
-        if (
-            avatar &&
-            profile.avatar
-        ) {
+        if (avatar && profile.avatar) {
 
             avatar.src =
                 profile.avatar;
@@ -105,9 +96,7 @@ async function loadProfile() {
 
     }
 
-    catch (
-        error
-    ) {
+    catch (error) {
 
         console.error(
             "Не удалось загрузить profile.json:",
@@ -120,7 +109,7 @@ async function loadProfile() {
 
 
 /* =========================================================
-   PODIUM
+   LOAD PODIUM
 ========================================================= */
 
 async function loadPodium() {
@@ -131,9 +120,7 @@ async function loadPodium() {
         );
 
 
-    if (
-        !container
-    ) {
+    if (!container) {
 
         return;
 
@@ -142,19 +129,15 @@ async function loadPodium() {
 
     try {
 
-        const response =
-            await fetch(
-                "/data/portfolio.json",
-                {
-                    cache:
-                        "no-store"
-                }
-            );
+        const response = await fetch(
+            "/data/portfolio.json",
+            {
+                cache: "no-store"
+            }
+        );
 
 
-        if (
-            !response.ok
-        ) {
+        if (!response.ok) {
 
             throw new Error(
                 `HTTP ${response.status}`
@@ -167,11 +150,7 @@ async function loadPodium() {
             await response.json();
 
 
-        if (
-            !Array.isArray(
-                projects
-            )
-        ) {
+        if (!Array.isArray(projects)) {
 
             throw new Error(
                 "portfolio.json должен содержать массив проектов"
@@ -180,75 +159,66 @@ async function loadPodium() {
         }
 
 
+        /* =================================================
+           Ищем только проекты подиума
+        ================================================= */
+
         const podiumProjects =
-            projects
-
-                .filter(
-                    project =>
-                        project.visible !== false
-                        &&
-                        (
-                            project.podium === 1
-                            ||
-                            project.podium === 2
-                            ||
-                            project.podium === 3
-                        )
-                )
-
-                .sort(
-                    (a, b) =>
-                        a.podium -
-                        b.podium
-                );
-
-
-        container.innerHTML =
-            "";
-
-
-        /*
-            ВАЖНО:
-            визуальный порядок пьедестала:
-            2 | 1 | 3
-        */
+            projects.filter(
+                project =>
+                    project.visible !== false
+                    &&
+                    (
+                        Number(project.podium) === 1
+                        ||
+                        Number(project.podium) === 2
+                        ||
+                        Number(project.podium) === 3
+                    )
+            );
 
 
         const place1 =
             podiumProjects.find(
                 project =>
-                    project.podium === 1
+                    Number(project.podium) === 1
             );
 
 
         const place2 =
             podiumProjects.find(
                 project =>
-                    project.podium === 2
+                    Number(project.podium) === 2
             );
 
 
         const place3 =
             podiumProjects.find(
                 project =>
-                    project.podium === 3
+                    Number(project.podium) === 3
             );
 
 
-        const ordered =
-            [
-                place2,
-                place1,
-                place3
-            ];
+        /*
+            Визуальный порядок:
+
+            2 | 1 | 3
+        */
+
+        const ordered = [
+            place2,
+            place1,
+            place3
+        ];
+
+
+        container.innerHTML = "";
 
 
         ordered.forEach(
             project => {
 
-                if (
-                    !project
-                ) {
+                if (!project) {
 
                     return;
 
@@ -257,43 +227,57 @@ async function loadPodium() {
 
                 container.insertAdjacentHTML(
                     "beforeend",
-                    createPodiumItem(
-                        project
-                    )
+                    createPodiumItem(project)
                 );
 
             }
         );
 
 
-        if (
-            container.children.length === 0
-        ) {
+        /* =================================================
+           Если вообще ничего нет
+        ================================================= */
+
+        if (container.children.length === 0) {
 
             container.innerHTML = `
-                <div>
+
+                <div class="podium-empty">
+
                     Подиум пока пуст.
+
                 </div>
+
             `;
 
         }
 
+
+        /*
+            После создания карточек
+            подключаем защиту картинок.
+        */
+
+        setupImageFallbacks();
+
     }
 
-    catch (
-        error
-    ) {
+    catch (error) {
 
         console.error(
-            "Не удалось загрузить podium:",
+            "Не удалось загрузить подиум:",
             error
         );
 
 
         container.innerHTML = `
-            <div>
+
+            <div class="podium-empty">
+
                 Не удалось загрузить подиум.
+
             </div>
+
         `;
 
     }
@@ -305,53 +289,93 @@ async function loadPodium() {
    CREATE PODIUM ITEM
 ========================================================= */
 
-function createPodiumItem(
-    project
-) {
+function createPodiumItem(project) {
 
     const place =
-        Number(
-            project.podium
-        );
+        Number(project.podium);
 
 
-    const medal =
-        place === 1
-            ? "🥇"
-            : place === 2
-                ? "🥈"
-                : "🥉";
+    /* =====================================================
+       MEDAL
+    ====================================================== */
 
+    let medal = "🏅";
+
+
+    if (place === 1) {
+
+        medal = "🥇";
+
+    }
+
+    else if (place === 2) {
+
+        medal = "🥈";
+
+    }
+
+    else if (place === 3) {
+
+        medal = "🥉";
+
+    }
+
+
+    /* =====================================================
+       PROJECT DATA
+    ====================================================== */
 
     const name =
-        project.name
-        ??
+        project.name ||
         "Без названия";
 
 
     const description =
-        project.description
-        ??
+        project.description ||
         "";
 
 
-    const icon =
-        project.icon
-        ??
-        "/assets/projects/default.png";
+    /*
+        Если banner отсутствует,
+        пустой или null:
 
+        → используем /assets/banner.png
+    */
 
     const banner =
         project.banner
-        ??
-        icon;
+            ? project.banner
+            : DEFAULT_BANNER;
 
+
+    /*
+        Аналогично для иконки.
+    */
+
+    const icon =
+        project.icon
+            ? project.icon
+            : DEFAULT_ICON;
+
+
+    /*
+        Если URL не указан,
+        строим его из ID.
+    */
 
     const url =
         project.url
-        ??
-        `/portfolio/${project.id}/`;
+        ||
+        (
+            project.id
+                ? `/portfolio/${project.id}/`
+                : "/portfolio/"
+        );
 
+
+    /* =====================================================
+       HTML
+    ====================================================== */
 
     return `
 
@@ -359,61 +383,166 @@ function createPodiumItem(
             class="podium-item place-${place}"
         >
 
+            <!-- =============================
+                 MEDAL
+            ============================== -->
+
             <div class="podium-medal">
+
                 ${medal}
+
             </div>
 
+
+            <!-- =============================
+                 PROJECT
+            ============================== -->
 
             <a
                 class="podium-project"
                 href="${escapeHTML(url)}"
             >
 
+
+                <!-- =========================
+                     BANNER
+                ========================== -->
+
                 <div class="podium-banner">
 
                     <img
+                        class="project-banner-image"
                         src="${escapeHTML(banner)}"
+                        data-fallback="${DEFAULT_BANNER}"
                         alt=""
+                        loading="lazy"
                     >
 
                 </div>
 
 
+                <!-- =========================
+                     BODY
+                ========================== -->
+
                 <div class="podium-project-body">
 
+
+                    <!-- ICON -->
+
                     <img
-                        class="podium-icon"
+                        class="podium-icon project-icon-image"
                         src="${escapeHTML(icon)}"
+                        data-fallback="${DEFAULT_ICON}"
                         alt="${escapeHTML(name)}"
+                        loading="lazy"
                     >
 
 
+                    <!-- NAME -->
+
                     <div class="podium-project-name">
+
                         ${escapeHTML(name)}
+
                     </div>
 
+
+                    <!-- DESCRIPTION -->
 
                     <div class="podium-project-description">
+
                         ${escapeHTML(description)}
+
                     </div>
 
+
+                    <!-- OPEN -->
 
                     <div class="podium-project-arrow">
+
                         Открыть проект →
+
                     </div>
+
 
                 </div>
 
             </a>
 
 
+            <!-- =============================
+                 PODIUM BASE
+            ============================== -->
+
             <div class="podium-base">
+
                 ${place}
+
             </div>
 
         </div>
 
     `;
+
+}
+
+
+/* =========================================================
+   IMAGE FALLBACK SYSTEM
+========================================================= */
+
+function setupImageFallbacks() {
+
+    const images =
+        document.querySelectorAll(
+            "img[data-fallback]"
+        );
+
+
+    images.forEach(
+        image => {
+
+            image.addEventListener(
+                "error",
+                () => {
+
+                    const fallback =
+                        image.dataset.fallback;
+
+
+                    /*
+                        Не допускаем бесконечный цикл,
+                        если даже fallback отсутствует.
+                    */
+
+                    if (
+                        !fallback
+                        ||
+                        image.src.endsWith(fallback)
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    console.warn(
+                        "Изображение не найдено:",
+                        image.src,
+                        "→ используем:",
+                        fallback
+                    );
+
+
+                    image.src =
+                        fallback;
+
+                }
+            );
+
+        }
+    );
 
 }
 
@@ -437,7 +566,8 @@ function setupEasterEgg() {
 
 
     if (
-        !easterEgg ||
+        !easterEgg
+        ||
         !easterDot
     ) {
 
@@ -445,6 +575,10 @@ function setupEasterEgg() {
 
     }
 
+
+    /* =====================================================
+       CLICK
+    ====================================================== */
 
     easterDot.addEventListener(
         "click",
@@ -462,6 +596,10 @@ function setupEasterEgg() {
         }
     );
 
+
+    /* =====================================================
+       CLICK OUTSIDE
+    ====================================================== */
 
     document.addEventListener(
         "click",
@@ -488,12 +626,10 @@ function setupEasterEgg() {
 
 
 /* =========================================================
-   ESCAPE
+   ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(
-    value
-) {
+function escapeHTML(value) {
 
     return String(
         value ?? ""
