@@ -5,7 +5,7 @@
     "description": "Система верификации, доверия и защиты пользователей.",
     "icon": "https://ibrop.dev/assets/verify/verify.png",
     "banner": null,
-    "url": "/portfolio/verify/",
+    "url": "verify.ibrop.dev/",
     "podium": 2,
     "pinned": true,
     "status": "active",
