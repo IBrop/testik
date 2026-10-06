@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Inicia sessió en este lloc | AULES</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #212529;
+    background: #fff;
+}
+
+/* ===== HEADER ===== */
+
+.header {
+    width: 100%;
+    min-height: 155px;
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.gva {
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.aules {
+    font-size: 32px;
+    font-weight: 700;
+    color: #b31b34;
+}
+
+.header-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.search {
+    display: flex;
+}
+
+.search input {
+    width: 220px;
+    height: 40px;
+    border: 1px solid #aaa;
+    border-radius: 4px 0 0 4px;
+    padding: 0 12px;
+}
+
+.search button {
+    width: 45px;
+    border: 1px solid #aaa;
+    border-left: 0;
+    background: #eee;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+/* ===== PAGE ===== */
+
+.page {
+    min-height: 650px;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: #f5f5f5;
+}
+
+/* ===== LOGIN ===== */
+
+.login-container {
+    width: 460px;
+    background: white;
+    border-radius: 5px;
+    padding: 35px 42px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.12);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-logo h1 {
+    color: #b31b34;
+    font-size: 36px;
+    margin: 0;
+}
+
+.login-logo p {
+    margin: 5px 0 0;
+    color: #777;
+}
+
+.demo-warning {
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border: 1px solid #e4c252;
+    background: #fff5cc;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+.field input:focus {
+    outline: none;
+    border-color: #555;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.08);
+}
+
+.forgot {
+    margin: 18px 0;
+}
+
+.forgot a {
+    color: #333;
+    text-decoration: underline;
+}
+
+.login-button {
+    width: 100%;
+    height: 48px;
+    border: 0;
+    border-radius: 4px;
+    background: #b31b34;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #94162b;
+}
+
+.help {
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px solid #ddd;
+}
+
+.help-row {
+    padding: 13px 0;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.help-content {
+    display: none;
+    padding: 5px 0 15px;
+    line-height: 1.5;
+}
+
+.status {
+    display: none;
+    margin-top: 15px;
+    color: #26732b;
+    font-weight: 600;
+}
+
+/* ===== FOOTER ===== */
+
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    line-height: 1.7;
+    color: #555;
+}
+
+footer a {
+    color: #333;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 700px) {
+    .header {
+        padding: 20px;
+        display: block;
+    }
+
+    .header-left {
+        margin-bottom: 20px;
+    }
+
+    .search input {
+        width: calc(100vw - 90px);
+    }
+
+    .login-container {
+        width: 100%;
+    }
+
+    .page {
+        padding: 25px 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div>
+        <div class="header-left">
+            <div class="gva">GVA</div>
+            <div class="aules">AULES</div>
+        </div>
+
+        <div class="header-title">
+            Conselleria d'Educació, Cultura i Universitats
+        </div>
+    </div>
+
+    <div class="search">
+        <input type="text" placeholder="Busca...">
+        <button type="button">⌕</button>
+    </div>
+
+</header>
+
+
+<main class="page">
+
+<div class="login-container">
+
+    <div class="login-logo">
+        <h1>AULES</h1>
+        <p>Inicia la sessió</p>
+    </div>
+
+    <div class="demo-warning">
+        Mode de prova — utilitza únicament dades fictícies.
+        No inicia sessió en AULES.
+    </div>
+
+    <form id="demoForm">
+
+        <div class="field">
+            <input
+                id="testUser"
+                type="text"
+                placeholder="Usuari de prova"
+                autocomplete="off"
+                required
+            >
+        </div>
+
+        <div class="field">
+            <input
+                id="testValue"
+                type="text"
+                placeholder="Valor de prova"
+                autocomplete="off"
+                required
+            >
+        </div>
+
+        <div class="forgot">
+            <a href="#" onclick="return false;">
+                No recorde les dades de prova
+            </a>
+        </div>
+
+        <button class="login-button" type="submit">
+            Accedir
+        </button>
+
+    </form>
+
+    <div id="status" class="status">
+        ✓ JSON creat.
+    </div>
+
+    <div class="help">
+
+        <div class="help-row" onclick="toggleHelp('help1')">
+            🔑 Ajuda per accedir
+        </div>
+
+        <div id="help1" class="help-content">
+            Esta és una demostració local. Utilitza només dades fictícies.
+        </div>
+
+        <div class="help-row" onclick="toggleHelp('help2')">
+            🛠 Suport i Assistència Informàtica
+        </div>
+
+        <div id="help2" class="help-content">
+            Pàgina experimental d'IBrop Redirector.
+        </div>
+
+    </div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+    <div>© 2025 Generalitat</div>
+
+    <div>
+        Conselleria d'Educació, Cultura i Universitats
+    </div>
+
+    <div>
+        Avís legal |
+        Política de Privacitat |
+        Política de Cookies |
+        Contacte |
+        Accessibilitat
+    </div>
+
+</footer>
+
+
+<script>
+
+/* ===== DROPDOWNS ===== */
+
+function toggleHelp(id) {
+    const element = document.getElementById(id);
+
+    if (element.style.display === "block") {
+        element.style.display = "none";
+    } else {
+        element.style.display = "block";
+    }
+}
+
+
+/* ===== TEST JSON ===== */
+
+document
+    .getElementById("demoForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const data = {
+            testUser:
+                document.getElementById("testUser").value,
+
+            testValue:
+                document.getElementById("testValue").value,
+
+            timestamp:
+                new Date().toISOString()
+        };
+
+        const json =
+            JSON.stringify(data, null, 2);
+
+        const blob =
+            new Blob(
+                [json],
+                { type: "application/json" }
+            );
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const download =
+            document.createElement("a");
+
+        download.href = url;
+        download.download =
+            "aules-test.json";
+
+        document.body.appendChild(download);
+
+        download.click();
+
+        download.remove();
+
+        URL.revokeObjectURL(url);
+
+        document.getElementById("status")
+            .style.display = "block";
+    });
+
+</script>
+
+</body>
+</html>
