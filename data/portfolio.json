@@ -20,7 +20,27 @@
     "order": 2
     
   },
-
+  {
+    "id": "verify",
+    "name": "Verify",
+    "description": "Система верификации, доверия и защиты пользователей.",
+    "icon": "https://ibrop.dev/assets/verify/verify.png",
+    "banner": null,
+    "url": "https://verify.ibrop.dev/",
+    "podium": 2,
+    "pinned": true,
+    "status": "active",
+    "status_text": "Active Development",
+    "category": "Security",
+    "tags": [
+      "Security",
+      "Python",
+      "Networking"
+    ],
+    "visible": true,
+    "order": 2
+    
+  },
   {
     "id": "neolite",
     "name": "NeoLite",
